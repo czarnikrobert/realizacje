@@ -120,6 +120,31 @@ label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
 .row--cat .input:hover { border-color: var(--line); }
 .row--cat code { font-size: 12px; color: var(--muted); }
 
+/* login screen */
+body.is-locked-out { overflow: hidden; }
+body.is-locked-out > :not(.lock):not(.overlay):not(.toast):not(script) { display: none; }
+.lock {
+  position: fixed; inset: 0; z-index: 70; overflow-y: auto; display: grid; place-items: center; padding: 24px 16px;
+  background:
+    radial-gradient(500px 360px at 85% 10%, rgba(25,175,239,.16), transparent 70%),
+    radial-gradient(420px 320px at 10% 90%, rgba(246,147,24,.14), transparent 70%),
+    var(--bg);
+}
+body:not(.is-locked-out) .lock { display: none; }
+.lock__box {
+  width: min(560px, 100%); padding: 36px 32px; border-radius: 22px; background: var(--surface);
+  box-shadow: 0 30px 80px -30px rgba(31,35,74,.35); text-align: center;
+}
+.lock__box > img { margin: 0 auto 14px; }
+.lock__box h1 { font: 800 26px/1.2 "Bricolage Grotesque", "Poppins", sans-serif; margin: 0 0 6px; letter-spacing: -.01em; }
+.lock__box .form { margin-top: 22px; text-align: left; }
+.lock__box .btn--primary { width: 100%; padding: 13px; font-size: 15px; }
+.lock__err { margin: 0; min-height: 1.4em; color: var(--red); font-size: 14px; text-align: center; }
+.lock .howto { margin: 0; }
+.form__row.form__row--2 { grid-template-columns: 1fr 1fr; align-items: end; }
+.small { font-size: 13px; }
+h3 { font-size: 16px; margin: 8px 0 0; }
+
 .card-box { padding: 28px; background: var(--surface); border-radius: 18px; box-shadow: var(--shadow); }
 .form { display: grid; gap: 16px; margin-top: 20px; }
 .form__row { display: grid; grid-template-columns: 1fr 1fr 140px; gap: 12px; }
@@ -206,7 +231,8 @@ legend { font-weight: 600; font-size: 14px; padding: 0; margin-bottom: 8px; }
   .row__thumb { width: 52px; height: 52px; }
   .row__actions { grid-column: 1 / -1; justify-content: flex-end; }
   .row--cat { grid-template-columns: 1fr; }
-  .form__row { grid-template-columns: 1fr; }
+  .form__row, .form__row.form__row--2 { grid-template-columns: 1fr; }
+  .lock__box { padding: 28px 20px; }
   .drawer__body, .drawer__head, .drawer__foot { padding-inline: 16px; }
   .drawer__foot { flex-wrap: wrap; }
 }

@@ -11,7 +11,56 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="admin.css">
 </head>
-<body>
+<body class="is-locked-out">
+
+<!-- LOGIN / FIRST SETUP -->
+<div class="lock" id="lock">
+  <div class="lock__box">
+    <img src="../images/brand/apple-touch-icon.png" alt="" width="56" height="56">
+    <h1>Panel administracyjny</h1>
+    <p class="muted" id="l-loading">Wczytywanie…</p>
+
+    <form id="l-login" class="form" hidden>
+      <label>Hasło
+        <input class="input" id="l-pass" type="password" required autocomplete="current-password" autofocus>
+      </label>
+      <button class="btn btn--primary" type="submit">Zaloguj</button>
+      <p class="lock__err" id="l-err" role="alert"></p>
+    </form>
+
+    <form id="l-setup" class="form form--left" hidden>
+      <p class="muted">Pierwsze uruchomienie. Połącz panel z repozytorium GitHub i ustal hasło – później do logowania wystarczy już tylko hasło.</p>
+      <div class="form__row">
+        <label>Login GitHub<input class="input" id="u-owner" required></label>
+        <label>Repozytorium<input class="input" id="u-repo" required></label>
+        <label>Gałąź<input class="input" id="u-branch" required value="main"></label>
+      </div>
+      <label>Token GitHub
+        <input class="input" id="u-token" type="password" required autocomplete="off" placeholder="github_pat_…">
+      </label>
+      <details class="howto">
+        <summary>Jak utworzyć token? (jednorazowo, ok. 2 minuty)</summary>
+        <ol>
+          <li>Otwórz <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens → Generate new token</a>.</li>
+          <li>Nazwa: np. <em>Panel realizacji</em>. Expiration: np. 1 rok.</li>
+          <li><strong>Repository access</strong> → <em>Only select repositories</em> → wybierz repozytorium ze stroną.</li>
+          <li><strong>Permissions → Repository permissions → Contents</strong> → <em>Read and write</em>. Nic więcej.</li>
+          <li><em>Generate token</em>, skopiuj i wklej powyżej.</li>
+        </ol>
+      </details>
+      <div class="form__row form__row--2">
+        <label>Hasło do panelu
+          <input class="input" id="u-pass" type="password" required minlength="10" autocomplete="new-password" placeholder="min. 10 znaków">
+        </label>
+        <label>Powtórz hasło
+          <input class="input" id="u-pass2" type="password" required autocomplete="new-password">
+        </label>
+      </div>
+      <button class="btn btn--primary" type="submit">Zapisz i zaloguj</button>
+      <p class="lock__err" id="u-err" role="alert"></p>
+    </form>
+  </div>
+</div>
 
 <header class="bar">
   <a class="bar__brand" href="../" target="_blank" rel="noopener" title="Otwórz stronę">
@@ -28,7 +77,7 @@
 <nav class="tabs" role="tablist">
   <button role="tab" data-tab="products" aria-selected="true">Produkty <small id="count-products"></small></button>
   <button role="tab" data-tab="categories" aria-selected="false">Kategorie <small id="count-categories"></small></button>
-  <button role="tab" data-tab="settings" aria-selected="false">Połączenie z GitHub</button>
+  <button role="tab" data-tab="settings" aria-selected="false">Konto i hasło</button>
 </nav>
 
 <main class="main">
@@ -69,33 +118,30 @@
   <!-- SETTINGS -->
   <section class="view" id="view-settings" hidden>
     <div class="card-box">
-      <h2>Połączenie z repozytorium GitHub</h2>
-      <p class="muted">Panel zapisuje zmiany bezpośrednio w repozytorium, z którego GitHub Pages publikuje stronę. Po opublikowaniu strona odświeża się zwykle w 1–2 minuty.</p>
+      <h2>Konto i bezpieczeństwo</h2>
+      <p class="muted" id="s-info"></p>
       <form id="s-form" class="form">
-        <div class="form__row">
-          <label>Właściciel (login lub organizacja)<input class="input" id="s-owner" required placeholder="np. polskiegryplanszowe"></label>
-          <label>Repozytorium<input class="input" id="s-repo" required placeholder="np. realizacje"></label>
-          <label>Gałąź<input class="input" id="s-branch" required value="main"></label>
+        <h3>Zmień hasło lub token</h3>
+        <label>Obecne hasło
+          <input class="input" id="s-current" type="password" required autocomplete="current-password">
+        </label>
+        <div class="form__row form__row--2">
+          <label>Nowe hasło
+            <input class="input" id="s-pass" type="password" autocomplete="new-password" minlength="10" placeholder="puste = bez zmian">
+          </label>
+          <label>Powtórz nowe hasło
+            <input class="input" id="s-pass2" type="password" autocomplete="new-password">
+          </label>
         </div>
-        <label>Token dostępu (fine-grained personal access token)
-          <input class="input" id="s-token" type="password" required autocomplete="off" placeholder="github_pat_…">
+        <label>Nowy token GitHub <small class="hint">(zostaw puste, aby nie zmieniać – np. gdy stary wygaśnie)</small>
+          <input class="input" id="s-token" type="password" autocomplete="off" placeholder="github_pat_…">
         </label>
         <div class="form__actions">
-          <button class="btn btn--primary" type="submit">Zapisz i połącz</button>
-          <button class="btn btn--ghost" type="button" id="s-logout">Wyloguj (usuń token z tej przeglądarki)</button>
+          <button class="btn btn--primary" type="submit">Zapisz zmiany</button>
+          <button class="btn btn--ghost" type="button" id="s-logout">Wyloguj</button>
         </div>
       </form>
-      <details class="howto">
-        <summary>Jak utworzyć token? (jednorazowo, ok. 2 minuty)</summary>
-        <ol>
-          <li>Zaloguj się na GitHub i otwórz <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Fine-grained tokens → Generate new token</a>.</li>
-          <li>Nazwa: np. <em>Panel realizacji</em>. Expiration: wybierz np. 1 rok.</li>
-          <li><strong>Repository access</strong> → <em>Only select repositories</em> → wybierz repozytorium ze stroną.</li>
-          <li><strong>Permissions → Repository permissions → Contents</strong> → <em>Read and write</em>. Nic więcej nie zaznaczaj.</li>
-          <li>Kliknij <em>Generate token</em>, skopiuj go i wklej powyżej.</li>
-        </ol>
-        <p class="muted">Token jest zapisywany tylko w tej przeglądarce (localStorage) i wysyłany wyłącznie do api.github.com. Nie udostępniaj go nikomu. Na komputerze, z którego korzysta wiele osób, po pracy kliknij „Wyloguj”.</p>
-      </details>
+      <p class="muted small">Token GitHub jest przechowywany w repozytorium wyłącznie w postaci zaszyfrowanej Twoim hasłem (plik <code>admin/auth.json</code>). Bez hasła nie da się go odczytać, dlatego używaj długiego hasła, którego nie masz nigdzie indziej.</p>
     </div>
   </section>
 </main>

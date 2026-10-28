@@ -5,7 +5,12 @@
   const THUMB_DIR = 'images/thumbs/';
   const FULL_MAX = 1800;
   const THUMB_MAX = 700;
-  const SETTINGS_KEY = 'pgp-admin-settings';
+  const LEGACY_SETTINGS_KEY = 'pgp-admin-settings'; // plain-text token from the first version – removed on start
+  const AUTH_PATH = 'admin/auth.json';
+  const AUTH_CACHE_KEY = 'pgp-admin-auth';
+  const SESSION_KEY = 'pgp-admin-session';
+  const PBKDF2_ITERATIONS = 600000;
+  const MIN_PASSWORD = 10;
 
   const $ = (sel, el = document) => el.querySelector(sel);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -22,28 +27,160 @@
     previews: new Map(),     // name -> object URL of photos published in this session (Pages may lag)
     removed: new Set(),      // photo names removed from products – deleted from repo on publish if unused
     selected: new Set(),
-    settings: loadSettings(),
+    settings: {},            // { owner, repo, branch, token } – only in memory/session after login
     connected: false,
   };
 
-  /* ---------- Settings ---------- */
-  function loadSettings() {
-    let s = {};
-    try { s = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch { /* storage unavailable */ }
-    // on <owner>.github.io/<repo>/admin/ we can guess the repository
+  const store = {
+    get(area, key) { try { return JSON.parse(window[area].getItem(key)); } catch { return null; } },
+    set(area, key, value) { try { window[area].setItem(key, JSON.stringify(value)); } catch { /* storage blocked */ } },
+    remove(area, key) { try { window[area].removeItem(key); } catch { /* storage blocked */ } },
+  };
+
+  // on <owner>.github.io/<repo>/admin/ we can guess the repository
+  function guessRepo() {
     const host = location.hostname.match(/^([^.]+)\.github\.io$/);
-    if (host && !s.owner) {
-      s.owner = host[1];
-      const seg = location.pathname.split('/').filter(Boolean)[0];
-      s.repo = seg && seg !== 'admin' ? seg : `${host[1]}.github.io`;
+    if (!host) return {};
+    const seg = location.pathname.split('/').filter(Boolean)[0];
+    return { owner: host[1], repo: seg && seg !== 'admin' ? seg : `${host[1]}.github.io` };
+  }
+
+  /* ---------- Password encryption of the GitHub token ---------- */
+  const bytesToB64 = (bytes) => { let s = ''; bytes.forEach((b) => { s += String.fromCharCode(b); }); return btoa(s); };
+  const b64ToBytes = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+
+  async function deriveKey(password, salt, iterations) {
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+  }
+
+  async function encryptSettings(settings, password) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const key = await deriveKey(password, salt, PBKDF2_ITERATIONS);
+    const data = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(settings)));
+    return {
+      v: 1, cipher: 'AES-256-GCM', kdf: 'PBKDF2-SHA256', iterations: PBKDF2_ITERATIONS,
+      salt: bytesToB64(salt), iv: bytesToB64(iv), data: bytesToB64(new Uint8Array(data)),
+      updated: new Date().toISOString(),
+    };
+  }
+
+  // throws when the password is wrong (AES-GCM authentication fails)
+  async function decryptSettings(auth, password) {
+    const key = await deriveKey(password, b64ToBytes(auth.salt), auth.iterations);
+    const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64ToBytes(auth.iv) }, key, b64ToBytes(auth.data));
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
+
+  // newest of: auth.json published on the site, copy cached in this browser (Pages may lag after a change)
+  async function fetchAuth() {
+    let remote = null;
+    try {
+      const res = await fetch('auth.json', { cache: 'no-cache' });
+      if (res.ok) remote = await res.json();
+    } catch { /* offline or not published yet */ }
+    const cached = store.get('localStorage', AUTH_CACHE_KEY);
+    if (remote && cached) return (cached.updated || '') > (remote.updated || '') ? cached : remote;
+    return remote || cached;
+  }
+
+  async function saveAuth(auth) {
+    let sha;
+    try { sha = (await gh(`${repoPath()}/contents/${AUTH_PATH}?ref=${branch()}`)).sha; }
+    catch (err) { if (err.status !== 404) throw err; }
+    await gh(`${repoPath()}/contents/${AUTH_PATH}`, {
+      method: 'PUT',
+      body: {
+        message: 'Panel: aktualizacja zaszyfrowanych danych logowania',
+        content: btoa(JSON.stringify(auth, null, 2) + '\n'),
+        branch: state.settings.branch || 'main',
+        ...(sha ? { sha } : {}),
+      },
+    });
+    store.set('localStorage', AUTH_CACHE_KEY, auth);
+  }
+
+  async function verifyRepoAccess() {
+    const info = await gh(repoPath());
+    if (info.permissions && !info.permissions.push) throw new Error('Token nie ma uprawnień do zapisu (Contents: Read and write).');
+  }
+
+  /* ---------- Login screen ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  async function startLock() {
+    store.remove('localStorage', LEGACY_SETTINGS_KEY);
+    const session = store.get('sessionStorage', SESSION_KEY);
+    if (session?.token) { await unlock(session); return; }
+
+    const auth = await fetchAuth();
+    $('#l-loading').hidden = true;
+    if (auth) {
+      $('#l-login').hidden = false;
+      $('#l-pass').focus();
+    } else {
+      const g = guessRepo();
+      $('#u-owner').value = g.owner || '';
+      $('#u-repo').value = g.repo || '';
+      $('#l-setup').hidden = false;
     }
-    return { branch: 'main', ...s };
   }
-  function saveSettings() {
-    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(state.settings)); }
-    catch { toast('Przeglądarka blokuje zapis ustawień – token trzeba będzie wpisać ponownie.', true); }
+
+  async function unlock(settings) {
+    state.settings = { branch: 'main', ...settings };
+    store.set('sessionStorage', SESSION_KEY, state.settings);
+    document.body.classList.remove('is-locked-out');
+    $('#s-info').textContent = `Panel jest połączony z repozytorium ${state.settings.owner}/${state.settings.repo} (gałąź ${state.settings.branch}).`;
+    await loadData();
   }
-  const hasToken = () => Boolean(state.settings.token && state.settings.owner && state.settings.repo);
+
+  $('#l-login').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = e.submitter || $('#l-login button');
+    btn.disabled = true;
+    $('#l-err').textContent = '';
+    try {
+      const auth = await fetchAuth();
+      const settings = await decryptSettings(auth, $('#l-pass').value);
+      $('#l-pass').value = '';
+      await unlock(settings);
+    } catch {
+      await sleep(800); // slows down guessing a little
+      $('#l-err').textContent = 'Nieprawidłowe hasło.';
+      $('#l-pass').select();
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  $('#l-setup').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = $('#u-err');
+    err.textContent = '';
+    const pass = $('#u-pass').value;
+    if (pass.length < MIN_PASSWORD) { err.textContent = `Hasło musi mieć co najmniej ${MIN_PASSWORD} znaków.`; return; }
+    if (pass !== $('#u-pass2').value) { err.textContent = 'Hasła nie są takie same.'; return; }
+    state.settings = {
+      owner: $('#u-owner').value.trim(),
+      repo: $('#u-repo').value.trim(),
+      branch: $('#u-branch').value.trim() || 'main',
+      token: $('#u-token').value.trim(),
+    };
+    busy('Sprawdzam dostęp do GitHub…');
+    try {
+      await verifyRepoAccess();
+      busy('Szyfruję i zapisuję dane logowania…');
+      await saveAuth(await encryptSettings(state.settings, pass));
+      busy('');
+      e.target.reset();
+      await unlock(state.settings);
+      toast('Gotowe! Od teraz logujesz się samym hasłem.');
+    } catch (error) {
+      busy('');
+      err.textContent = error.message;
+    }
+  });
 
   /* ---------- GitHub API ---------- */
   async function gh(path, { method = 'GET', body } = {}) {
@@ -62,7 +199,7 @@
       let msg = res.statusText;
       try { msg = (await res.json()).message || msg; } catch { /* no JSON body */ }
       const hints = { 401: 'Token jest nieprawidłowy lub wygasł.', 403: 'Token nie ma uprawnień do zapisu (Contents: Read and write).', 404: 'Nie znaleziono repozytorium, gałęzi lub pliku – sprawdź ustawienia i uprawnienia tokenu.', 409: 'Repozytorium jest puste lub zmieniło się w trakcie zapisu.' };
-      throw new Error(`${hints[res.status] || 'Błąd GitHub'} (${res.status}: ${msg})`);
+      throw Object.assign(new Error(`${hints[res.status] || 'Błąd GitHub'} (${res.status}: ${msg})`), { status: res.status });
     }
     return res.status === 204 ? null : res.json();
   }
@@ -79,23 +216,20 @@
 
   /* ---------- Loading ---------- */
   async function loadData() {
-    if (hasToken()) {
-      try {
-        const file = await gh(`${repoPath()}/contents/${DATA_PATH}?ref=${branch()}`);
-        setData(JSON.parse(b64ToText(file.content)), file.sha);
-        state.connected = true;
-        setStatus(`Połączono: ${state.settings.owner}/${state.settings.repo}`, 'ok');
-        showNotice('');
-        return;
-      } catch (err) {
-        state.connected = false;
-        setStatus('Brak połączenia z GitHub', 'warn');
-        showNotice(`Nie udało się wczytać danych z GitHub: ${esc(err.message)} <button class="btn btn--sm btn--ghost" data-goto="settings">Sprawdź ustawienia</button>`);
-      }
-    } else {
-      setStatus('Tryb podglądu (bez zapisu)', 'warn');
-      showNotice('Panel działa w trybie podglądu – możesz przeglądać i edytować, ale aby <strong>opublikować</strong> zmiany, skonfiguruj połączenie z GitHub. <button class="btn btn--sm btn--ghost" data-goto="settings">Skonfiguruj</button>');
+    try {
+      const file = await gh(`${repoPath()}/contents/${DATA_PATH}?ref=${branch()}`);
+      setData(JSON.parse(b64ToText(file.content)), file.sha);
+      state.connected = true;
+      setStatus(`Połączono: ${state.settings.owner}/${state.settings.repo}`, 'ok');
+      showNotice('');
+      return;
+    } catch (err) {
+      state.connected = false;
+      setStatus('Brak połączenia z GitHub', 'warn');
+      const expired = err.status === 401;
+      showNotice(`Nie udało się wczytać danych z GitHub: ${esc(err.message)}${expired ? ' Utwórz nowy token i wpisz go w zakładce „Konto i hasło”.' : ''} <button class="btn btn--sm btn--ghost" data-goto="settings">Konto i hasło</button>`);
     }
+    // read-only fallback so the list is still visible
     const res = await fetch(`../${DATA_PATH}`, { cache: 'no-cache' });
     setData(await res.json(), null);
   }
@@ -212,7 +346,6 @@
   function goTab(name) {
     document.querySelectorAll('.tabs button').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === name));
     document.querySelectorAll('.view').forEach((v) => { v.hidden = v.id !== `view-${name}`; });
-    if (name === 'settings') fillSettingsForm();
   }
   $('.tabs').addEventListener('click', (e) => { const b = e.target.closest('button[data-tab]'); if (b) goTab(b.dataset.tab); });
   document.addEventListener('click', (e) => { const b = e.target.closest('[data-goto]'); if (b) goTab(b.dataset.goto); });
@@ -634,34 +767,34 @@
     if (state.pending.size) toast('Uwaga: nowe zdjęcia nie są w pliku JSON – publikuj przez GitHub, aby je zapisać.', true);
   });
 
-  /* ---------- Settings form ---------- */
-  function fillSettingsForm() {
-    const s = state.settings;
-    $('#s-owner').value = s.owner || '';
-    $('#s-repo').value = s.repo || '';
-    $('#s-branch').value = s.branch || 'main';
-    $('#s-token').value = s.token || '';
-  }
-
+  /* ---------- Account: change password / token, logout ---------- */
   $('#s-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (isDirty() && !confirm('Masz nieopublikowane zmiany – ponowne połączenie wczyta dane z GitHub i je odrzuci. Kontynuować?')) return;
-    state.settings = {
-      owner: $('#s-owner').value.trim(),
-      repo: $('#s-repo').value.trim(),
-      branch: $('#s-branch').value.trim() || 'main',
-      token: $('#s-token').value.trim(),
-    };
-    busy('Łączę z GitHub…');
+    const newPass = $('#s-pass').value;
+    const newToken = $('#s-token').value.trim();
+    if (!newPass && !newToken) { toast('Wpisz nowe hasło lub nowy token.', true); return; }
+    if (newPass && newPass.length < MIN_PASSWORD) { toast(`Nowe hasło musi mieć co najmniej ${MIN_PASSWORD} znaków.`, true); return; }
+    if (newPass !== $('#s-pass2').value) { toast('Nowe hasła nie są takie same.', true); return; }
+
+    busy('Sprawdzam obecne hasło…');
     try {
-      const info = await gh(repoPath());
-      if (info.permissions && !info.permissions.push) throw new Error('Token nie ma uprawnień do zapisu (Contents: Read and write).');
-      saveSettings();
-      state.pending.clear();
-      state.removed.clear();
-      await loadData();
+      const current = await fetchAuth();
+      try { await decryptSettings(current, $('#s-current').value); }
+      catch { throw new Error('Obecne hasło jest nieprawidłowe.'); }
+
+      const previous = state.settings;
+      if (newToken) {
+        state.settings = { ...state.settings, token: newToken };
+        busy('Sprawdzam nowy token…');
+        try { await verifyRepoAccess(); } catch (err) { state.settings = previous; throw err; }
+      }
+      busy('Zapisuję…');
+      await saveAuth(await encryptSettings(state.settings, newPass || $('#s-current').value));
+      store.set('sessionStorage', SESSION_KEY, state.settings);
+      e.target.reset();
       busy('');
-      if (state.connected) { toast('Połączono z GitHub.'); goTab('products'); }
+      toast(newPass ? 'Hasło zostało zmienione.' : 'Token został zaktualizowany.');
+      if (newToken && !state.connected) await loadData();
     } catch (err) {
       busy('');
       toast(err.message, true);
@@ -669,21 +802,19 @@
   });
 
   $('#s-logout').addEventListener('click', () => {
-    state.settings = { owner: state.settings.owner, repo: state.settings.repo, branch: state.settings.branch };
-    saveSettings();
-    $('#s-token').value = '';
-    state.connected = false;
-    setStatus('Tryb podglądu (bez zapisu)', 'warn');
-    updatePublishButton();
-    toast('Token usunięty z tej przeglądarki.');
+    if (isDirty() && !confirm('Masz nieopublikowane zmiany. Wylogować się i je utracić?')) return;
+    store.remove('sessionStorage', SESSION_KEY);
+    state.baseline = serialize(); // nothing to warn about any more
+    state.pending.clear();
+    location.reload();
   });
 
   window.addEventListener('beforeunload', (e) => {
     if (isDirty()) { e.preventDefault(); e.returnValue = ''; }
   });
 
-  loadData().catch((err) => {
+  startLock().catch((err) => {
     console.error(err);
-    showNotice(`Nie udało się wczytać danych: ${esc(err.message)}`);
+    $('#l-loading').textContent = `Nie udało się uruchomić panelu: ${err.message}`;
   });
 })();

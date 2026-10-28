@@ -37,16 +37,22 @@ Jeśli chcesz adres typu `realizacje.polskiegryplanszowe.pl`: w **Settings → P
 
 ## 2. Panel administracyjny
 
-Adres: `https://TWOJ-LOGIN.github.io/realizacje/admin/`
+Adres: `https://czarnikrobert.github.io/realizacje/admin/`
 
-Przy pierwszym wejściu panel poprosi o połączenie z GitHub (zakładka **Połączenie z GitHub**). Potrzebny jest token:
+Panel jest chroniony hasłem. Przy pierwszym wejściu poprosi o token GitHub i o ustalenie hasła:
 
 1. <https://github.com/settings/personal-access-tokens/new>
 2. **Repository access → Only select repositories** → wybierz `realizacje`.
 3. **Permissions → Repository permissions → Contents: Read and write**.
-4. **Generate token**, skopiuj i wklej w panelu.
+4. **Generate token**, skopiuj i wklej w panelu, a potem wymyśl hasło (min. 10 znaków).
 
-Token zapisuje się tylko w Twojej przeglądarce. Bez niego nikt nie może niczego zmienić, nawet jeśli zna adres panelu.
+Panel szyfruje token Twoim hasłem (AES-256-GCM, klucz z PBKDF2-SHA256, 600 000 iteracji) i zapisuje go w repozytorium jako `admin/auth.json`. Od tej pory na każdym komputerze logujesz się samym hasłem. Bez hasła tokenu nie da się odczytać, a bez tokenu nie da się nic zmienić. Plik jest jednak publiczny, dlatego hasło powinno być długie i niepowtarzalne.
+
+Zakładka **Konto i hasło** pozwala zmienić hasło, wpisać nowy token (np. gdy stary wygaśnie) i się wylogować. Zalogowanie trwa do zamknięcia karty przeglądarki.
+
+**Zapomniane hasło:** usuń plik `admin/auth.json` w repozytorium na GitHub (Add file → … → Delete file), utwórz nowy token, a panel poprosi o ponowną konfigurację.
+
+> Panel zapisuje `admin/auth.json` i `data/products.json` bezpośrednio na GitHub. Zanim wyślesz zmiany z tego komputera przez `git push`, najpierw pobierz je poleceniem `git pull`.
 
 ### Co można robić w panelu
 
