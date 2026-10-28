@@ -242,23 +242,6 @@ svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-wi
 
 .empty { text-align: center; color: var(--muted); padding: 48px 0; }
 
-/* ---------- Offer ---------- */
-.offer { padding: clamp(64px, 9vw, 112px) 0; background: var(--surface); border-block: 1px solid var(--line); }
-.offer__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin-top: 44px; }
-.tile {
-  padding: 26px 24px 28px; border-radius: var(--radius); background: var(--bg);
-  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
-}
-.tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
-.tile__icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; color: #fff; margin-bottom: 20px; }
-.tile__icon svg { width: 26px; height: 26px; }
-.tile--blue .tile__icon { background: var(--blue); }
-.tile--orange .tile__icon { background: var(--orange); }
-.tile--green .tile__icon { background: var(--green); }
-.tile--navy .tile__icon { background: var(--navy); }
-.tile h3 { font-size: 21px; margin-bottom: 10px; }
-.tile p { margin: 0; color: var(--ink-2); font-size: 15px; }
-
 /* ---------- Contact ---------- */
 .contact {
   position: relative; overflow: hidden; padding: clamp(64px, 9vw, 112px) 0;
