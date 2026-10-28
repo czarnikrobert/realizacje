@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel administracyjny – Realizacje PGP</title>
+  <link rel="icon" type="image/png" href="../images/brand/favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="bar">
+  <a class="bar__brand" href="../" target="_blank" rel="noopener" title="Otwórz stronę">
+    <img src="../images/brand/apple-touch-icon.png" alt="" width="36" height="36">
+    <span><strong>Realizacje PGP</strong><small>Panel administracyjny</small></span>
+  </a>
+  <span class="status" id="status"></span>
+  <div class="bar__actions">
+    <button class="btn btn--ghost" id="btn-export" type="button" title="Pobierz plik products.json">Eksportuj JSON</button>
+    <button class="btn btn--primary" id="btn-publish" type="button" disabled>Opublikuj zmiany</button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" data-tab="products" aria-selected="true">Produkty <small id="count-products"></small></button>
+  <button role="tab" data-tab="categories" aria-selected="false">Kategorie <small id="count-categories"></small></button>
+  <button role="tab" data-tab="settings" aria-selected="false">Połączenie z GitHub</button>
+</nav>
+
+<main class="main">
+  <div class="notice" id="notice" hidden></div>
+
+  <!-- PRODUCTS -->
+  <section class="view" id="view-products">
+    <div class="toolbar">
+      <input class="input" type="search" id="p-search" placeholder="Szukaj produktu…">
+      <select class="input" id="p-filter">
+        <option value="">Wszystkie kategorie</option>
+      </select>
+      <button class="btn btn--dark" id="btn-new" type="button">+ Nowy produkt</button>
+    </div>
+
+    <div class="bulk" id="bulk" hidden>
+      <span id="bulk-count"></span>
+      <select class="input input--sm" id="bulk-cat"></select>
+      <button class="btn btn--sm btn--dark" id="bulk-add" type="button">Dodaj do kategorii</button>
+      <button class="btn btn--sm btn--ghost" id="bulk-remove" type="button">Usuń z kategorii</button>
+      <button class="btn btn--sm btn--ghost" id="bulk-clear" type="button">Odznacz</button>
+    </div>
+
+    <div class="list" id="p-list"></div>
+    <p class="muted center" id="p-empty" hidden>Brak produktów spełniających kryteria.</p>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="view" id="view-categories" hidden>
+    <form class="toolbar" id="c-form">
+      <input class="input" id="c-name" placeholder="Nazwa nowej kategorii, np. Gry edukacyjne" required>
+      <button class="btn btn--dark" type="submit">+ Dodaj kategorię</button>
+    </form>
+    <p class="hint">Kolejność kategorii tutaj = kolejność filtrów na stronie. Nazwę zmienisz, klikając w nią.</p>
+    <div class="list" id="c-list"></div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="view" id="view-settings" hidden>
+    <div class="card-box">
+      <h2>Połączenie z repozytorium GitHub</h2>
+      <p class="muted">Panel zapisuje zmiany bezpośrednio w repozytorium, z którego GitHub Pages publikuje stronę. Po opublikowaniu strona odświeża się zwykle w 1–2 minuty.</p>
+      <form id="s-form" class="form">
+        <div class="form__row">
+          <label>Właściciel (login lub organizacja)<input class="input" id="s-owner" required placeholder="np. polskiegryplanszowe"></label>
+          <label>Repozytorium<input class="input" id="s-repo" required placeholder="np. realizacje"></label>
+          <label>Gałąź<input class="input" id="s-branch" required value="main"></label>
+        </div>
+        <label>Token dostępu (fine-grained personal access token)
+          <input class="input" id="s-token" type="password" required autocomplete="off" placeholder="github_pat_…">
+        </label>
+        <div class="form__actions">
+          <button class="btn btn--primary" type="submit">Zapisz i połącz</button>
+          <button class="btn btn--ghost" type="button" id="s-logout">Wyloguj (usuń token z tej przeglądarki)</button>
+        </div>
+      </form>
+      <details class="howto">
+        <summary>Jak utworzyć token? (jednorazowo, ok. 2 minuty)</summary>
+        <ol>
+          <li>Zaloguj się na GitHub i otwórz <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Fine-grained tokens → Generate new token</a>.</li>
+          <li>Nazwa: np. <em>Panel realizacji</em>. Expiration: wybierz np. 1 rok.</li>
+          <li><strong>Repository access</strong> → <em>Only select repositories</em> → wybierz repozytorium ze stroną.</li>
+          <li><strong>Permissions → Repository permissions → Contents</strong> → <em>Read and write</em>. Nic więcej nie zaznaczaj.</li>
+          <li>Kliknij <em>Generate token</em>, skopiuj go i wklej powyżej.</li>
+        </ol>
+        <p class="muted">Token jest zapisywany tylko w tej przeglądarce (localStorage) i wysyłany wyłącznie do api.github.com. Nie udostępniaj go nikomu. Na komputerze, z którego korzysta wiele osób, po pracy kliknij „Wyloguj”.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<!-- PRODUCT EDITOR -->
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer__backdrop" data-close></div>
+  <form class="drawer__panel" id="e-form" novalidate>
+    <header class="drawer__head">
+      <h2 id="e-heading">Edytuj produkt</h2>
+      <button class="icon-btn" type="button" data-close aria-label="Zamknij">✕</button>
+    </header>
+    <div class="drawer__body">
+      <label>Nazwa produktu
+        <input class="input" id="e-title" required>
+      </label>
+      <label>Adres (identyfikator w linku)
+        <input class="input input--mono" id="e-id" required pattern="[a-z0-9-]+">
+        <small class="hint">Tylko małe litery, cyfry i myślniki. Link: …/#p/<span id="e-id-preview"></span></small>
+      </label>
+
+      <fieldset>
+        <legend>Kategorie</legend>
+        <div class="checks" id="e-cats"></div>
+      </fieldset>
+
+      <label>Opis
+        <textarea class="input" id="e-desc" rows="7" placeholder="Opis produktu. Pusta linia = nowy akapit."></textarea>
+      </label>
+
+      <label>Tagi (oddzielone przecinkami)
+        <input class="input" id="e-tags" placeholder="np. drewno, upominek, personalizacja">
+      </label>
+
+      <div class="switches">
+        <label class="switch"><input type="checkbox" id="e-featured"><span></span> Wyróżniony (na górze strony)</label>
+        <label class="switch"><input type="checkbox" id="e-hidden"><span></span> Ukryty (szkic, niewidoczny na stronie)</label>
+      </div>
+
+      <fieldset>
+        <legend>Zdjęcia <small class="hint">– pierwsze jest okładką. Przeciągnij, aby zmienić kolejność.</small></legend>
+        <div class="images" id="e-images"></div>
+        <label class="drop" id="e-drop">
+          <input type="file" id="e-files" accept="image/*" multiple hidden>
+          <strong>Dodaj zdjęcia</strong>
+          <span>Kliknij lub upuść pliki tutaj. Zdjęcia zostaną automatycznie zmniejszone.</span>
+        </label>
+      </fieldset>
+    </div>
+    <footer class="drawer__foot">
+      <button class="btn btn--danger-ghost" type="button" id="e-delete">Usuń produkt</button>
+      <span class="spacer"></span>
+      <button class="btn btn--ghost" type="button" data-close>Anuluj</button>
+      <button class="btn btn--primary" type="submit">Zapisz produkt</button>
+    </footer>
+  </form>
+</div>
+
+<div class="overlay" id="overlay" hidden><div class="overlay__box"><span class="spinner"></span><p id="overlay-text">Publikuję…</p></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

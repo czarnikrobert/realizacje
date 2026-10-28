@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nasze realizacje – Polskie Gry Planszowe</title>
+  <meta name="description" content="Przykłady realizacji Polskich Gier Planszowych: drewniane figurki, obrazy i ikony, pamiątki regionalne, medaliony, magnesy i elementy gier wykonywane na zamówienie.">
+  <meta property="og:title" content="Nasze realizacje – Polskie Gry Planszowe">
+  <meta property="og:description" content="Drewniane figurki, obrazy, pamiątki i elementy gier – zobacz, co dla Ciebie wykonamy.">
+  <meta property="og:image" content="images/produkty/img-2907.jpg">
+  <meta name="theme-color" content="#f6f2ea">
+  <link rel="icon" type="image/png" href="images/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="topbar" id="top">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="#top" aria-label="Polskie Gry Planszowe – początek strony">
+      <img src="images/brand/apple-touch-icon.png" alt="" width="44" height="44">
+      <span class="brand__name">Polskie Gry<br>Planszowe</span>
+    </a>
+    <nav class="nav" aria-label="Główna nawigacja">
+      <a href="#realizacje">Realizacje</a>
+      <a href="#oferta">Co robimy</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="btn btn--dark btn--sm" href="#kontakt">Zapytaj o wycenę</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow"><span class="dot dot--green"></span> Portfolio realizacji</p>
+        <h1>Zamieniamy <em>Twoje pomysły</em> w drewniane realizacje.</h1>
+        <p class="lead">Figurki, obrazy i ikony, pamiątki regionalne, medaliony i elementy gier. Kilka przykładów tego, co przygotowaliśmy dla parafii, sanktuariów, muzeów i firm.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#realizacje">Zobacz realizacje
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m0 0-6-6m6 6 6-6"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="#kontakt">Porozmawiajmy o projekcie</a>
+        </div>
+        <dl class="stats">
+          <div><dt id="stat-products">30+</dt><dd>realizacji w galerii</dd></div>
+          <div><dt id="stat-cats">9</dt><dd>kategorii produktów</dd></div>
+          <div><dt>od 1 szt.</dt><dd>po duże serie</dd></div>
+        </dl>
+      </div>
+      <div class="hero__stage" id="hero-stage" aria-hidden="true">
+        <span class="cube cube--a"></span>
+        <span class="cube cube--b"></span>
+        <span class="cube cube--c"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="clients" aria-label="Zaufali nam">
+    <div class="clients__label">Zaufali nam</div>
+    <div class="marquee">
+      <div class="marquee__track">
+        <span>CERN</span><span>TVP2</span><span>MSZ</span><span>IPN</span><span>BP</span><span>Mennica</span><span>Wawel</span><span>Wieliczka</span><span>Szlachetna Paczka</span><span>MARR</span><span>Polski Holding</span><span>PKN</span><span>Projekt Rekreator</span>
+        <span aria-hidden="true">CERN</span><span aria-hidden="true">TVP2</span><span aria-hidden="true">MSZ</span><span aria-hidden="true">IPN</span><span aria-hidden="true">BP</span><span aria-hidden="true">Mennica</span><span aria-hidden="true">Wawel</span><span aria-hidden="true">Wieliczka</span><span aria-hidden="true">Szlachetna Paczka</span><span aria-hidden="true">MARR</span><span aria-hidden="true">Polski Holding</span><span aria-hidden="true">PKN</span><span aria-hidden="true">Projekt Rekreator</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="realizacje">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow"><span class="dot dot--orange"></span> Galeria</p>
+          <h2>Nasze realizacje</h2>
+          <p class="section-head__lead">Kliknij produkt, aby zobaczyć opis i więcej zdjęć.</p>
+        </div>
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="search" placeholder="Szukaj, np. szopka, Kraków…" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="filters" id="filters" role="tablist" aria-label="Kategorie"></div>
+
+      <div class="grid" id="grid" aria-live="polite"></div>
+      <p class="empty" id="empty" hidden>Nic nie znaleźliśmy. Spróbuj innego słowa albo wybierz „Wszystkie”.</p>
+    </div>
+  </section>
+
+  <section class="offer" id="oferta">
+    <div class="wrap">
+      <div class="section-head section-head--center">
+        <p class="eyebrow"><span class="dot dot--blue"></span> Co robimy</p>
+        <h2>Od pomysłu do gotowego produktu</h2>
+        <p class="section-head__lead">Projektujemy, przygotowujemy prototyp i produkujemy – od jednej sztuki po duże serie.</p>
+      </div>
+      <div class="offer__grid">
+        <article class="tile tile--blue">
+          <span class="tile__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.3"/><circle cx="15.5" cy="15.5" r="1.3"/><circle cx="15.5" cy="8.5" r="1.3"/><circle cx="8.5" cy="15.5" r="1.3"/></svg></span>
+          <h3>Gry na zamówienie</h3>
+          <p>Gry planszowe, karciane i edukacyjne zaprojektowane od zera pod Twój temat i odbiorców.</p>
+        </article>
+        <article class="tile tile--orange">
+          <span class="tile__icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-6 7 6v11"/><path d="M10 21v-6h4v6"/></svg></span>
+          <h3>Dla urzędów i instytucji</h3>
+          <p>Gry i upominki promujące region, historię i lokalne atrakcje – dla urzędów, muzeów i fundacji.</p>
+        </article>
+        <article class="tile tile--green">
+          <span class="tile__icon"><svg viewBox="0 0 24 24"><path d="M12 3c4 3 6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 2-7 6-10Z"/><path d="M12 21V11"/></svg></span>
+          <h3>Produkty z drewna</h3>
+          <p>Figurki, obrazy, medaliony, magnesy i dekoracje wycinane laserowo z pełnokolorowym nadrukiem.</p>
+        </article>
+        <article class="tile tile--navy">
+          <span class="tile__icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></span>
+          <h3>Dla firm</h3>
+          <p>Gadżety, upominki świąteczne i gry integracyjne w barwach Twojej marki.</p>
+        </article>
+        <article class="tile tile--blue">
+          <span class="tile__icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 12h20M12 5v14"/></svg></span>
+          <h3>Gry wielkoformatowe</h3>
+          <p>Plansze i pionki w dużej skali na festyny, pikniki, szkolenia i wydarzenia plenerowe.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="kontakt">
+    <div class="wrap contact__inner">
+      <div>
+        <p class="eyebrow eyebrow--light"><span class="dot dot--orange"></span> Kontakt</p>
+        <h2>Masz pomysł? <br>Zróbmy go razem.</h2>
+        <p class="contact__lead">Napisz, co chcesz przygotować, w jakim nakładzie i na kiedy. Odpowiemy z propozycją i wyceną.</p>
+        <div class="contact__cta">
+          <a class="btn btn--primary" href="mailto:biuro@polskiegryplanszowe.pl?subject=Zapytanie%20o%20wycen%C4%99">Napisz do nas</a>
+          <a class="btn btn--outline-light" href="tel:+48501286064">+48 501 286 064</a>
+        </div>
+      </div>
+      <ul class="contact__list">
+        <li><span>E-mail</span><a href="mailto:biuro@polskiegryplanszowe.pl">biuro@polskiegryplanszowe.pl</a></li>
+        <li><span>Telefon</span><a href="tel:+48501286064">+48 501 286 064</a></li>
+        <li><span>Adres</span>ul. Węgierska 7, 30-535 Kraków</li>
+        <li><span>Godziny</span>pon.–pt., 7:00–15:00</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <img src="images/brand/apple-touch-icon.png" alt="" width="36" height="36">
+      <div>
+        <strong>Polskie Gry Planszowe Sp. z o.o.</strong>
+        <span>NIP 6793117489</span>
+      </div>
+    </div>
+    <nav class="footer__links" aria-label="Linki">
+      <a href="https://polskiegryplanszowe.pl" target="_blank" rel="noopener">polskiegryplanszowe.pl</a>
+      <a href="https://www.facebook.com/PolskieGryPlanszowe" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.youtube.com/PolskieGryPlanszoweKrakow" target="_blank" rel="noopener">YouTube</a>
+    </nav>
+    <p class="footer__copy">© <span id="year">2026</span> Polskie Gry Planszowe</p>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title" hidden>
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel">
+    <button class="icon-btn modal__close" data-close aria-label="Zamknij">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="viewer">
+      <div class="viewer__stage" id="m-stage">
+        <img id="m-img" alt="">
+        <button class="icon-btn viewer__nav viewer__nav--prev" id="m-prev" aria-label="Poprzednie zdjęcie">
+          <svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg>
+        </button>
+        <button class="icon-btn viewer__nav viewer__nav--next" id="m-next" aria-label="Następne zdjęcie">
+          <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+        <span class="viewer__count" id="m-count"></span>
+      </div>
+      <div class="viewer__thumbs" id="m-thumbs"></div>
+    </div>
+    <div class="details">
+      <div class="details__cats" id="m-cats"></div>
+      <h3 class="details__title" id="m-title"></h3>
+      <div class="details__desc" id="m-desc"></div>
+      <div class="details__tags" id="m-tags"></div>
+      <div class="details__cta">
+        <a class="btn btn--primary" id="m-ask" href="#">Zapytaj o podobny produkt</a>
+        <button class="btn btn--ghost" id="m-share" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+          <span>Kopiuj link</span>
+        </button>
+      </div>
+      <p class="details__note">Każdy produkt wykonamy w Twojej wersji: z innym wizerunkiem, napisem, kształtem lub w innym rozmiarze.</p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
