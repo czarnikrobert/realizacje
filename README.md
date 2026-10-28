@@ -12,32 +12,31 @@ images/brand/         – logo i ikony
 admin/                – panel administracyjny
 ```
 
-## 1. Publikacja na GitHub (jednorazowo)
+## 1. Publikacja
 
-1. Załóż konto na <https://github.com> (jeśli go nie masz).
-2. Utwórz nowe repozytorium: **New repository**, nazwa np. `realizacje`, widoczność **Public**. Nie zaznaczaj „Add a README”.
-3. W terminalu, w tym katalogu:
-
-   ```bash
-   git init -b main
-   git add .
-   git commit -m "Strona z realizacjami"
-   git remote add origin https://github.com/TWOJ-LOGIN/realizacje.git
-   git push -u origin main
-   ```
-
-4. W repozytorium na GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a branch**, gałąź `main`, folder `/ (root)`, **Save**.
-5. Po 1–2 minutach strona będzie pod adresem `https://TWOJ-LOGIN.github.io/realizacje/`.
+- Strona: **<https://pgprealizacje.pl>** (także `www.pgprealizacje.pl`)
+- Repozytorium: <https://github.com/czarnikrobert/realizacje>, gałąź `main`, publikowana przez GitHub Pages (Settings → Pages, źródło: `main`, folder `/`).
+- Stary adres `czarnikrobert.github.io/realizacje` przekierowuje na domenę.
 
 > Folder `pojedyncze/` (oryginalne zdjęcia, ~50 MB) jest pominięty w `.gitignore`. Na stronie są ich zoptymalizowane kopie z `images/`.
 
-### Własna domena (opcjonalnie)
+### Domena pgprealizacje.pl
 
-Jeśli chcesz adres typu `realizacje.polskiegryplanszowe.pl`: w **Settings → Pages → Custom domain** wpisz domenę, a u operatora domeny dodaj rekord **CNAME** `realizacje` → `TWOJ-LOGIN.github.io`.
+Domena jest zarejestrowana w home.pl. Plik `CNAME` w repozytorium mówi GitHub Pages, pod jaką domeną ma działać strona. Strefa DNS w panelu home.pl:
+
+| Typ | Nazwa | Wartość |
+|---|---|---|
+| A | @ | `185.199.108.153` |
+| A | @ | `185.199.109.153` |
+| A | @ | `185.199.110.153` |
+| A | @ | `185.199.111.153` |
+| CNAME | www | `czarnikrobert.github.io.` |
+
+Kłódkę HTTPS włącza się w **Settings → Pages → Enforce HTTPS**, gdy GitHub wystawi certyfikat.
 
 ## 2. Panel administracyjny
 
-Adres: `https://czarnikrobert.github.io/realizacje/admin/`
+Adres: `https://pgprealizacje.pl/admin/`
 
 Panel jest chroniony hasłem. Przy pierwszym wejściu poprosi o token GitHub i o ustalenie hasła:
 
