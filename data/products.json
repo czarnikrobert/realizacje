@@ -43,6 +43,28 @@
   ],
   "products": [
     {
+      "id": "herby",
+      "title": "Herby",
+      "categories": [
+        "figurki",
+        "pamiatki"
+      ],
+      "description": "Herb w formie drewnianej pamiątki sprawdzi się jako upominek z konkretnego miasta lub gminy albo jako prezent dla kogoś związanego z danym miejscem. Wzór przygotowujemy na podstawie przesłanego projektu, a wycinamy go laserowo i uzupełniamy pełnokolorowym nadrukiem z możliwością złocenia. Szczegóły herbu i kształt ustalamy indywidualnie, dlatego pamiątka może nawiązywać do lokalnych tradycji i wydarzeń.",
+      "tags": [],
+      "images": [
+        "herby-mvurynkx9h3.jpg",
+        "herby-mvuryntebzr.jpg",
+        "herby-mvurynxt2k4.jpg",
+        "herby-mvuryo2lp0q.jpg",
+        "herby-mvurygrz5ac.jpg",
+        "herby-mvurygzgtln.jpg",
+        "herby-mvuryh5zp6r.jpg",
+        "herby-mvuryhcixbq.jpg",
+        "herby-mvuryhj5nzf.jpg",
+        "herby-mvuryhq9ve9.jpg"
+      ]
+    },
+    {
       "id": "dedykowana-zawieszka-na-choinke",
       "title": "Dedykowana zawieszka na choinke",
       "categories": [
