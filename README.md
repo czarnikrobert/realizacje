@@ -8,7 +8,8 @@ assets/               – wygląd (CSS) i działanie (JS) strony
 data/products.json    – produkty i kategorie (edytowane przez panel)
 images/produkty/      – zdjęcia w dużej rozdzielczości (max 1800 px)
 images/thumbs/        – miniatury (max 700 px)
-images/brand/         – logo i ikony
+images/brand/         – logo, ikony i obrazek podglądu linku (og-image.jpg, 1200×630)
+robots.txt, sitemap.xml – dla wyszukiwarek (panel /admin/ wyłączony z indeksowania)
 admin/                – panel administracyjny
 ```
 
