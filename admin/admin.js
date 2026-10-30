@@ -132,7 +132,14 @@
     store.set('sessionStorage', SESSION_KEY, state.settings);
     document.body.classList.remove('is-locked-out');
     $('#s-info').textContent = `Panel jest połączony z repozytorium ${state.settings.owner}/${state.settings.repo} (gałąź ${state.settings.branch}).`;
+    updateAiSettingsInfo();
     await loadData();
+  }
+
+  function updateAiSettingsInfo() {
+    const has = Boolean(state.settings.deepseekKey);
+    $('#s-ai-state').textContent = has ? '(zapisany – wpisz nowy, aby go zmienić)' : '(brak – dodaj, aby pisać opisy przez AI)';
+    $('#s-ai-remove-row').hidden = !has;
   }
 
   $('#l-login').addEventListener('submit', async (e) => {
@@ -474,6 +481,7 @@
       || '<span class="muted">Najpierw dodaj kategorie w zakładce „Kategorie”.</span>';
     updateIdPreview();
     renderEditorImages();
+    resetAi();
     drawer.hidden = false;
     document.body.classList.add('is-locked');
     setTimeout(() => $('#e-title').focus(), 50);
@@ -513,6 +521,109 @@
       hidden: $('#e-hidden').checked,
     });
   }
+
+  /* ---------- AI descriptions (DeepSeek) ---------- */
+  const DEEPSEEK_URL = 'https://api.deepseek.com/chat/completions';
+  const DEEPSEEK_MODEL = 'deepseek-chat';
+  const ai = { previous: null, controller: null };
+
+  function resetAi() {
+    ai.controller?.abort();
+    ai.previous = null;
+    $('#ai-hints').value = '';
+    $('#ai-undo').hidden = true;
+    $('#ai-status').textContent = '';
+    $('.ai').classList.remove('is-busy');
+  }
+
+  // a few existing descriptions show the model the house style
+  function styleExamples(skipId) {
+    return state.data.products
+      .filter((p) => p.id !== skipId && p.description && p.description.length > 80)
+      .slice(0, 3)
+      .map((p) => `„${p.title}”: ${p.description}`)
+      .join('\n\n');
+  }
+
+  function aiPrompt(mode) {
+    const draft = readEditor();
+    const cats = draft.categories.map((id) => state.data.categories.find((c) => c.id === id)?.name).filter(Boolean);
+    const facts = [
+      `Nazwa produktu: ${draft.title || '(brak)'}`,
+      cats.length && `Kategorie: ${cats.join(', ')}`,
+      draft.tags.length && `Tagi: ${draft.tags.join(', ')}`,
+      $('#ai-hints').value.trim() && `Wskazówki od autora: ${$('#ai-hints').value.trim()}`,
+      mode === 'improve' && `Obecny opis do poprawienia:\n${draft.description}`,
+    ].filter(Boolean).join('\n');
+    const system = 'Jesteś copywriterem firmy Polskie Gry Planszowe z Krakowa, która produkuje na zamówienie drewniane figurki, obrazy i ikony, '
+      + 'pamiątki regionalne, medaliony, zawieszki, magnesy i elementy gier (sklejka, wycinanie laserowe, pełnokolorowy nadruk). '
+      + 'Piszesz opisy produktów do galerii realizacji. Zasady: po polsku, rzeczowo i ciepło, bez przesadnych ozdobników i wykrzykników, '
+      + '2–4 zdania (do ok. 450 znaków), zwykły tekst bez nagłówków, list, cudzysłowów i emoji. '
+      + 'Nie wymyślaj faktów: wymiarów, liczby sztuk, materiałów ani technik, których nie ma w danych – w razie braku pisz ogólniej.';
+    const user = (mode === 'improve'
+      ? 'Popraw poniższy opis: popraw język i styl, zachowaj wszystkie fakty, nie dodawaj nowych.'
+      : 'Napisz opis produktu na podstawie danych.')
+      + `\n\n${facts}\n\nPrzykłady opisów w stylu firmy:\n${styleExamples(editor.original?.id)}\n\nZwróć wyłącznie sam opis.`;
+    return [{ role: 'system', content: system }, { role: 'user', content: user }];
+  }
+
+  async function aiErrorMessage(res) {
+    let detail = '';
+    try { detail = (await res.json())?.error?.message || ''; } catch { /* not JSON */ }
+    if (res.status === 401) return 'DeepSeek odrzucił klucz API – sprawdź go w zakładce „Konto i hasło”.';
+    if (res.status === 402) return 'Brak środków na koncie DeepSeek – doładuj je na platform.deepseek.com.';
+    if (res.status === 429) return 'Za dużo zapytań do DeepSeek – spróbuj za chwilę.';
+    return `Błąd DeepSeek (${res.status})${detail ? `: ${detail}` : ''}.`;
+  }
+
+  async function aiGenerate(mode) {
+    const key = state.settings.deepseekKey;
+    if (!key) { toast('Najpierw dodaj klucz API DeepSeek w zakładce „Konto i hasło”.', true); return; }
+    if (!$('#e-title').value.trim()) { toast('Najpierw wpisz nazwę produktu.', true); $('#e-title').focus(); return; }
+    if (mode === 'improve' && !$('#e-desc').value.trim()) { toast('Opis jest pusty – użyj „Napisz opis”.', true); return; }
+
+    const box = $('.ai');
+    box.classList.add('is-busy');
+    $('#ai-status').textContent = 'DeepSeek pisze…';
+    ai.controller = new AbortController();
+    try {
+      let res;
+      try {
+        res = await fetch(DEEPSEEK_URL, {
+          method: 'POST',
+          signal: ai.controller.signal,
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
+          body: JSON.stringify({ model: DEEPSEEK_MODEL, messages: aiPrompt(mode), temperature: 0.7, max_tokens: 500 }),
+        });
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+        throw new Error('Brak połączenia z DeepSeek (sieć lub blokada przeglądarki).');
+      }
+      if (!res.ok) throw new Error(await aiErrorMessage(res));
+      const text = (await res.json())?.choices?.[0]?.message?.content?.trim().replace(/^["„]|["”]$/g, '');
+      if (!text) throw new Error('DeepSeek zwrócił pustą odpowiedź – spróbuj ponownie.');
+      ai.previous = $('#e-desc').value;
+      $('#e-desc').value = text;
+      $('#ai-undo').hidden = false;
+      $('#ai-status').textContent = 'Gotowe – przeczytaj i popraw, jeśli trzeba.';
+    } catch (err) {
+      $('#ai-status').textContent = '';
+      toast(err.message, true);
+    } finally {
+      box.classList.remove('is-busy');
+      ai.controller = null;
+    }
+  }
+
+  $('#ai-write').addEventListener('click', () => aiGenerate('write'));
+  $('#ai-improve').addEventListener('click', () => aiGenerate('improve'));
+  $('#ai-undo').addEventListener('click', () => {
+    if (ai.previous === null) return;
+    $('#e-desc').value = ai.previous;
+    ai.previous = null;
+    $('#ai-undo').hidden = true;
+    $('#ai-status').textContent = 'Przywrócono poprzedni opis.';
+  });
 
   function updateIdPreview() { $('#e-id-preview').textContent = $('#e-id').value || '…'; }
   $('#e-title').addEventListener('input', () => {
@@ -772,7 +883,9 @@
     e.preventDefault();
     const newPass = $('#s-pass').value;
     const newToken = $('#s-token').value.trim();
-    if (!newPass && !newToken) { toast('Wpisz nowe hasło lub nowy token.', true); return; }
+    const newAiKey = $('#s-ai-key').value.trim();
+    const removeAiKey = $('#s-ai-remove').checked;
+    if (!newPass && !newToken && !newAiKey && !removeAiKey) { toast('Wpisz nowe hasło, token lub klucz DeepSeek.', true); return; }
     if (newPass && newPass.length < MIN_PASSWORD) { toast(`Nowe hasło musi mieć co najmniej ${MIN_PASSWORD} znaków.`, true); return; }
     if (newPass !== $('#s-pass2').value) { toast('Nowe hasła nie są takie same.', true); return; }
 
@@ -788,12 +901,18 @@
         busy('Sprawdzam nowy token…');
         try { await verifyRepoAccess(); } catch (err) { state.settings = previous; throw err; }
       }
+      const next = { ...state.settings };
+      if (newAiKey) next.deepseekKey = newAiKey;
+      else if (removeAiKey) delete next.deepseekKey;
       busy('Zapisuję…');
-      await saveAuth(await encryptSettings(state.settings, newPass || $('#s-current').value));
+      await saveAuth(await encryptSettings(next, newPass || $('#s-current').value));
+      state.settings = next;
       store.set('sessionStorage', SESSION_KEY, state.settings);
       e.target.reset();
+      updateAiSettingsInfo();
       busy('');
-      toast(newPass ? 'Hasło zostało zmienione.' : 'Token został zaktualizowany.');
+      toast(newPass ? 'Hasło zostało zmienione.' : newToken ? 'Token został zaktualizowany.'
+        : newAiKey ? 'Klucz DeepSeek został zapisany.' : 'Klucz DeepSeek został usunięty.');
       if (newToken && !state.connected) await loadData();
     } catch (err) {
       busy('');
