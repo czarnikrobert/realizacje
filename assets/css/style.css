@@ -98,7 +98,7 @@ svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-wi
 .nav a:hover { background: var(--bg-2); color: var(--ink); }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; padding: clamp(40px, 7vw, 96px) 0 clamp(48px, 7vw, 88px); }
+.hero { position: relative; overflow-x: clip; padding: clamp(40px, 7vw, 96px) 0 clamp(48px, 7vw, 88px); }
 .hero::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
@@ -185,11 +185,9 @@ svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-wi
 
 .filters {
   position: sticky; top: 76px; z-index: 20;
-  display: flex; gap: 8px; padding: 12px 0; margin-bottom: 18px;
-  overflow-x: auto; scrollbar-width: none;
+  display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 0; margin-bottom: 18px;
   background: linear-gradient(var(--bg) 75%, transparent);
 }
-.filters::-webkit-scrollbar { display: none; }
 .chip {
   display: inline-flex; align-items: center; gap: 8px; flex: none;
   padding: 10px 16px; border-radius: 999px; border: 0; cursor: pointer;
@@ -355,7 +353,13 @@ svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-wi
 @media (max-width: 720px) {
   .nav { display: none; }
   .topbar__inner { height: 66px; }
-  .filters { top: 66px; }
+  /* phones: one swipeable row; the fading edge shows there is more to the right */
+  .filters {
+    top: 66px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+    margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+  .filters.has-more { -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent); mask-image: linear-gradient(90deg, #000 82%, transparent); }
   html { scroll-padding-top: 76px; }
   .brand img { width: 38px; height: 38px; }
   .stats { gap: 22px; }

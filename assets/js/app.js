@@ -66,6 +66,11 @@
       btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       renderGrid();
     };
+    // on phones the row scrolls sideways – fade the right edge while more chips are hidden there
+    const updateMore = () => box.classList.toggle('has-more', box.scrollLeft + box.clientWidth < box.scrollWidth - 4);
+    box.onscroll = updateMore;
+    window.addEventListener('resize', updateMore);
+    updateMore();
   }
 
   /* ---------- Grid ---------- */
