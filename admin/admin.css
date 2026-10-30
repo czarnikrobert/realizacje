@@ -143,6 +143,9 @@ body:not(.is-locked-out) .lock { display: none; }
 .lock .howto { margin: 0; }
 .form__row.form__row--2 { grid-template-columns: 1fr 1fr; align-items: end; }
 .small { font-size: 13px; }
+.ai { display: grid; gap: 10px; padding: 14px; border-radius: 14px; background: var(--bg); }
+.ai__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ai.is-busy .btn { pointer-events: none; opacity: .5; }
 h3 { font-size: 16px; margin: 8px 0 0; }
 
 .card-box { padding: 28px; background: var(--surface); border-radius: 18px; box-shadow: var(--shadow); }

@@ -136,6 +136,11 @@
         <label>Nowy token GitHub <small class="hint">(zostaw puste, aby nie zmieniać – np. gdy stary wygaśnie)</small>
           <input class="input" id="s-token" type="password" autocomplete="off" placeholder="github_pat_…">
         </label>
+        <label>Klucz API DeepSeek <small class="hint" id="s-ai-state">(do pisania opisów przez AI)</small>
+          <input class="input" id="s-ai-key" type="password" autocomplete="off" placeholder="sk-…">
+          <small class="hint">Klucz utworzysz na <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">platform.deepseek.com → API keys</a>. Jest szyfrowany Twoim hasłem razem z tokenem GitHub.</small>
+        </label>
+        <label class="switch" id="s-ai-remove-row" hidden><input type="checkbox" id="s-ai-remove"><span></span> Usuń zapisany klucz DeepSeek</label>
         <div class="form__actions">
           <button class="btn btn--primary" type="submit">Zapisz zmiany</button>
           <button class="btn btn--ghost" type="button" id="s-logout">Wyloguj</button>
@@ -171,6 +176,18 @@
       <label>Opis
         <textarea class="input" id="e-desc" rows="7" placeholder="Opis produktu. Pusta linia = nowy akapit."></textarea>
       </label>
+
+      <div class="ai">
+        <label>Asystent AI (DeepSeek) <small class="hint">– AI nie widzi zdjęć, opiera się na nazwie, kategoriach, tagach i Twoich wskazówkach</small>
+          <input class="input" id="ai-hints" placeholder="Wskazówki, np. sklejka 4 mm, druk UV, złocenia, zestaw 6 szt., dla parafii">
+        </label>
+        <div class="ai__actions">
+          <button class="btn btn--sm btn--dark" type="button" id="ai-write">✨ Napisz opis</button>
+          <button class="btn btn--sm btn--ghost" type="button" id="ai-improve">Popraw obecny opis</button>
+          <button class="btn btn--sm btn--ghost" type="button" id="ai-undo" hidden>↶ Cofnij</button>
+          <span class="hint" id="ai-status" role="status"></span>
+        </div>
+      </div>
 
       <label>Tagi (oddzielone przecinkami)
         <input class="input" id="e-tags" placeholder="np. drewno, upominek, personalizacja">
