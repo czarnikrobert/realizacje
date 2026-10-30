@@ -39,6 +39,25 @@
   ],
   "products": [
     {
+      "id": "zawieszki-na-choinke-opowiesci-biblijne",
+      "title": "Zawieszki na choinkę - Opowieści biblijne",
+      "categories": [
+        "medaliony",
+        "swieta"
+      ],
+      "description": "Zestaw 6 zawieszek na choinkę z historiami biblijnymi. Zawieszki posiadają dwustronny nadruk ze złoceniami. Do kompletu dołożone są złote sznureczki.",
+      "tags": [],
+      "images": [
+        "zawieszki-na-choinke-opowiesci-biblijne-mvuo0jh2gzv.jpg",
+        "zawieszki-na-choinke-opowiesci-biblijne-mvuo0jokn4f.jpg",
+        "zawieszki-na-choinke-opowiesci-biblijne-mvuo0juumww.jpg",
+        "zawieszki-na-choinke-opowiesci-biblijne-mvuo0k2dg5b.jpg",
+        "zawieszki-na-choinke-opowiesci-biblijne-mvuo0k9hcc4.jpg",
+        "zawieszki-na-choinke-opowiesci-biblijne-mvuo0kfmqun.jpg"
+      ],
+      "featured": true
+    },
+    {
       "id": "swiety-jozef-spiacy",
       "title": "Święty Józef Śpiący",
       "categories": [
