@@ -43,13 +43,29 @@
   ],
   "products": [
     {
+      "id": "dedykowana-zawieszka-na-choinke",
+      "title": "Dedykowana zawieszka na choinke",
+      "categories": [
+        "medaliony",
+        "swieta"
+      ],
+      "description": "Dedykowane zawieszki na choinkę. Z jednej strony złocony nadruk przedstawia na przykład szopkę, a z drugiej dedykowane życzenia. To świąteczny upominek, który można spersonalizować i podarować bliskim.",
+      "tags": [],
+      "images": [
+        "dedykowana-zawieszka-na-choinke-mvuro5p20ml.jpg",
+        "dedykowana-zawieszka-na-choinke-mvurobwa87c.jpg",
+        "dedykowana-zawieszka-na-choinke-mvurrtjkfv6.jpg",
+        "dedykowana-zawieszka-na-choinke-mvurs3uzijz.jpg"
+      ]
+    },
+    {
       "id": "zawieszki-na-choinke-opowiesci-biblijne",
       "title": "Zawieszki na choinkę - Opowieści biblijne",
       "categories": [
         "medaliony",
         "swieta"
       ],
-      "description": "Zestaw 6 zawieszek na choinkę z historiami biblijnymi. Zawieszki posiadają dwustronny nadruk ze złoceniami. Do kompletu dołożone są złote sznureczki.",
+      "description": "Zestaw sześciu zawieszek na choinkę z historiami biblijnymi. Każda zawieszka ma dwustronny nadruk ze złoceniami, a w komplecie znajdują się złote sznureczki do zawieszenia. To ciepły, świąteczny upominek, który może stać się częścią rodzinnych tradycji przy choince.",
       "tags": [],
       "images": [
         "zawieszki-na-choinke-opowiesci-biblijne-mvuo0jh2gzv.jpg",
@@ -266,9 +282,10 @@
       "id": "ikona-swieta-rodzina",
       "title": "Ikona Świętej Rodziny",
       "categories": [
-        "obrazy"
+        "obrazy",
+        "magnesy"
       ],
-      "description": "Ikona na drewnie inspirowana tradycyjnym malarstwem ikonowym, ze złotym tłem i postarzanymi krawędziami.",
+      "description": "Ikona Świętej Rodziny w formie magnesu na lodówkę, ze złoceniami podkreślającymi jej wyjątkowy charakter. Drobny, ciepły upominek, który przypomina o rodzinie i świątecznym nastroju. Dobrze sprawdza się jako pamiątka parafialna albo drobny prezent.",
       "tags": [
         "ikona",
         "złocenie"
