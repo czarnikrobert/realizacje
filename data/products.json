@@ -43,26 +43,31 @@
   ],
   "products": [
     {
-      "id": "herby",
-      "title": "Herby",
+      "id": "roraty-2024",
+      "title": "Propozycja świąteczna - dedykowane złocone zawieszki",
       "categories": [
-        "figurki",
-        "pamiatki"
+        "medaliony",
+        "swieta"
       ],
-      "description": "Herb wykonany z drewna sprawdzi się jako upominek z konkretnego miasta lub gminy. Wzór przygotowujemy na podstawie przesłanego projektu. Wycinany laserowo i uzupełniamy pełnokolorowym nadrukiem z możliwością złocenia. Szczegóły herbu ustalamy indywidualnie.",
-      "tags": [],
+      "description": "Dedykowane drewniane zawieszki ze złoceniami to świąteczna propozycja przygotowywana z myślą o parafiach i wspólnotach, między innymi na czas rorat i światecznych spotkań. Wzór ustalamy indywidualnie, dzięki czemu zawieszka może nawiązywać do konkretnego miejsca lub okazji. Taki upominek łączy drewno, złocony nadruk i osobisty charakter, a przy tym dobrze sprawdza się jako drobny upominek.",
+      "tags": [
+        "roraty",
+        "parafie",
+        "seria"
+      ],
       "images": [
-        "herby-mvurynkx9h3.jpg",
-        "herby-mvuryntebzr.jpg",
-        "herby-mvurynxt2k4.jpg",
-        "herby-mvuryo2lp0q.jpg",
-        "herby-mvurygrz5ac.jpg",
-        "herby-mvurygzgtln.jpg",
-        "herby-mvuryh5zp6r.jpg",
-        "herby-mvuryhcixbq.jpg",
-        "herby-mvuryhj5nzf.jpg",
-        "herby-mvuryhq9ve9.jpg"
-      ]
+        "roraty-2024-mvuwtm7si5w.jpg",
+        "img-2928.jpg",
+        "roraty-2024-mvuwsuj5778.jpg",
+        "roraty-2024-mvslas7u39g.jpg",
+        "roraty-2024-mvuwtkzb4d3.jpg",
+        "roraty-2024-mvuwsu4t1za.jpg",
+        "roraty-2024-mvuwujznyep.jpg",
+        "roraty-2024-mvuwtklttsz.jpg",
+        "roraty-2024-mvuwtll2x79.jpg",
+        "roraty-2024-mvux6iajd11.jpg"
+      ],
+      "featured": true
     },
     {
       "id": "dedykowana-zawieszka-na-choinke",
@@ -118,6 +123,28 @@
       "featured": true
     },
     {
+      "id": "herby",
+      "title": "Herby",
+      "categories": [
+        "figurki",
+        "pamiatki"
+      ],
+      "description": "Herb wykonany z drewna sprawdzi się jako upominek z konkretnego miasta lub gminy. Wzór przygotowujemy na podstawie przesłanego projektu. Wycinany laserowo i uzupełniamy pełnokolorowym nadrukiem z możliwością złocenia. Szczegóły herbu ustalamy indywidualnie.",
+      "tags": [],
+      "images": [
+        "herby-mvurynkx9h3.jpg",
+        "herby-mvuryntebzr.jpg",
+        "herby-mvurynxt2k4.jpg",
+        "herby-mvuryo2lp0q.jpg",
+        "herby-mvurygrz5ac.jpg",
+        "herby-mvurygzgtln.jpg",
+        "herby-mvuryh5zp6r.jpg",
+        "herby-mvuryhcixbq.jpg",
+        "herby-mvuryhj5nzf.jpg",
+        "herby-mvuryhq9ve9.jpg"
+      ]
+    },
+    {
       "id": "szopka-krakowska",
       "title": "Szopka krakowska",
       "categories": [
@@ -133,33 +160,6 @@
       "images": [
         "img-2907.jpg",
         "szopka-krakowska-mvsla25vmpj.jpg"
-      ],
-      "featured": true
-    },
-    {
-      "id": "roraty-2024",
-      "title": "Propozycja świąteczna - dedykowane złocone zawieszki",
-      "categories": [
-        "medaliony",
-        "swieta"
-      ],
-      "description": "Dedykowane drewniane zawieszki ze złoceniami to świąteczna propozycja przygotowywana z myślą o parafiach i wspólnotach, między innymi na czas rorat i światecznych spotkań. Wzór ustalamy indywidualnie, dzięki czemu zawieszka może nawiązywać do konkretnego miejsca lub okazji. Taki upominek łączy drewno, złocony nadruk i osobisty charakter, a przy tym dobrze sprawdza się jako drobny upominek.",
-      "tags": [
-        "roraty",
-        "parafie",
-        "seria"
-      ],
-      "images": [
-        "roraty-2024-mvuwtm7si5w.jpg",
-        "img-2928.jpg",
-        "roraty-2024-mvuwsuj5778.jpg",
-        "roraty-2024-mvslas7u39g.jpg",
-        "roraty-2024-mvuwtkzb4d3.jpg",
-        "roraty-2024-mvuwsu4t1za.jpg",
-        "roraty-2024-mvuwujznyep.jpg",
-        "roraty-2024-mvuwtklttsz.jpg",
-        "roraty-2024-mvuwtll2x79.jpg",
-        "roraty-2024-mvux6iajd11.jpg"
       ],
       "featured": true
     },
@@ -181,6 +181,22 @@
         "img-2902.jpg"
       ],
       "featured": true
+    },
+    {
+      "id": "drewniany-kosciol",
+      "title": "Model drewnianego kościoła",
+      "categories": [
+        "pamiatki"
+      ],
+      "description": "Miniatura zabytkowego drewnianego kościoła odwzorowana na podstawie.\n\nPrzygotujemy model dowolnego budynku: kościoła, sanktuarium, ratusza czy siedziby firmy.",
+      "tags": [
+        "architektura",
+        "na zamówienie"
+      ],
+      "images": [
+        "img-2876.jpg",
+        "drewniany-kosciol-mvus38tnhiw.jpg"
+      ]
     },
     {
       "id": "jan-pawel-ii-medalion",
@@ -233,40 +249,6 @@
       ]
     },
     {
-      "id": "drewniany-kosciol",
-      "title": "Model drewnianego kościoła",
-      "categories": [
-        "pamiatki"
-      ],
-      "description": "Miniatura zabytkowego drewnianego kościoła odwzorowana na podstawie.\n\nPrzygotujemy model dowolnego budynku: kościoła, sanktuarium, ratusza czy siedziby firmy.",
-      "tags": [
-        "architektura",
-        "na zamówienie"
-      ],
-      "images": [
-        "img-2876.jpg",
-        "drewniany-kosciol-mvus38tnhiw.jpg"
-      ]
-    },
-    {
-      "id": "figurki-sakralne",
-      "title": "Figurki sakralne na wzór rzeźb",
-      "categories": [
-        "figurki"
-      ],
-      "description": "Figurki odwzorowujące zabytkowe rzeźby: Matkę Bożą z Dzieciątkiem oraz Chrystusa. Złocenia i kolory oryginału są widoczne na nadruku, a kontur wycinamy po obrysie postaci.",
-      "tags": [
-        "rzeźba",
-        "sanktuaria"
-      ],
-      "images": [
-        "img-2856.jpg",
-        "figurki-sakralne-mvus3iujwqy.jpg",
-        "img-2858.jpg",
-        "figurki-sakralne-mvus3oqaz37.jpg"
-      ]
-    },
-    {
       "id": "dzieciatko-praskie",
       "title": "Dzieciątko Jezus Koletańskie",
       "categories": [
@@ -296,6 +278,24 @@
       "images": [
         "img-2872.jpg",
         "sw-krzysztof-mvus498yvkv.jpg"
+      ]
+    },
+    {
+      "id": "figurki-sakralne",
+      "title": "Figurki sakralne na wzór rzeźb",
+      "categories": [
+        "figurki"
+      ],
+      "description": "Figurki odwzorowujące zabytkowe rzeźby: Matkę Bożą z Dzieciątkiem oraz Chrystusa. Złocenia i kolory oryginału są widoczne na nadruku, a kontur wycinamy po obrysie postaci.",
+      "tags": [
+        "rzeźba",
+        "sanktuaria"
+      ],
+      "images": [
+        "img-2856.jpg",
+        "figurki-sakralne-mvus3iujwqy.jpg",
+        "img-2858.jpg",
+        "figurki-sakralne-mvus3oqaz37.jpg"
       ]
     },
     {
