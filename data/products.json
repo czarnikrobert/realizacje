@@ -49,7 +49,7 @@
         "figurki",
         "pamiatki"
       ],
-      "description": "Herb w formie drewnianej pamiątki sprawdzi się jako upominek z konkretnego miasta lub gminy albo jako prezent dla kogoś związanego z danym miejscem. Wzór przygotowujemy na podstawie przesłanego projektu, a wycinamy go laserowo i uzupełniamy pełnokolorowym nadrukiem z możliwością złocenia. Szczegóły herbu i kształt ustalamy indywidualnie, dlatego pamiątka może nawiązywać do lokalnych tradycji i wydarzeń.",
+      "description": "Herb wykonany z drewna sprawdzi się jako upominek z konkretnego miasta lub gminy. Wzór przygotowujemy na podstawie przesłanego projektu. Wycinany laserowo i uzupełniamy pełnokolorowym nadrukiem z możliwością złocenia. Szczegóły herbu ustalamy indywidualnie.",
       "tags": [],
       "images": [
         "herby-mvurynkx9h3.jpg",
@@ -87,7 +87,7 @@
         "medaliony",
         "swieta"
       ],
-      "description": "Zestaw sześciu zawieszek na choinkę z historiami biblijnymi. Każda zawieszka ma dwustronny nadruk ze złoceniami, a w komplecie znajdują się złote sznureczki do zawieszenia. To ciepły, świąteczny upominek, który może stać się częścią rodzinnych tradycji przy choince.",
+      "description": "Zestaw sześciu zawieszek na choinkę z historiami biblijnymi. Każda zawieszka ma dwustronny nadruk ze złoceniami, a w komplecie znajdują się złote sznureczki do zawieszenia. To ciepły, świąteczny upominek.",
       "tags": [],
       "images": [
         "zawieszki-na-choinke-opowiesci-biblijne-mvuo0jh2gzv.jpg",
@@ -105,7 +105,7 @@
       "categories": [
         "figurki"
       ],
-      "description": "Figurka św. Józefa Śpiącego na profilowanej drewnianej podstawie z napisem. Kształt wycinamy laserowo, a pełnokolorowy nadruk oddaje wszystkie detale wizerunku.\n\nDobry pomysł na upominek, pamiątkę parafialną albo element domowego ołtarzyka. Napis na podstawie możemy zmienić.",
+      "description": "Figurka św. Józefa Śpiącego na profilowanej drewnianej podstawie z napisem. Kształt wycinamy laserowo, a pełnokolorowy nadruk oddaje wszystkie detale wizerunku.\n\nDobry pomysł na upominek, pamiątkę parafialną albo element domowego ołtarzyka. Z tyłu na figurce wygrawerowany tekst modlitwy.",
       "tags": [
         "drewno",
         "nadruk",
@@ -124,7 +124,7 @@
         "pamiatki",
         "swieta"
       ],
-      "description": "Wielobarwna miniatura szopki krakowskiej złożona z kilku warstw drewna. Wieże, kopuły i drobne figurki tworzą przestrzenny efekt, a całość stoi stabilnie na podstawie.\n\nŚwietnie sprawdza się jako pamiątka z Krakowa i świąteczny prezent firmowy.",
+      "description": "Wielobarwna miniatura szopki krakowskiej z drewna.\n\nŚwietnie sprawdza się jako pamiątka z Krakowa i świąteczny prezent firmowy.",
       "tags": [
         "Kraków",
         "warstwowa",
@@ -169,7 +169,7 @@
       "categories": [
         "pamiatki"
       ],
-      "description": "Komplet pamiątek dla zamku w Bobolicach: model zamku oraz postacie z jego historii i legend. Każdy element ma drewnianą podstawkę z nazwą miejsca.\n\nTaką serię przygotujemy dla każdego zabytku, muzeum czy atrakcji turystycznej.",
+      "description": "Komplet pamiątek dla zamku w Bobolicach: model zamku oraz postacie z jego historii i legend. Każdy element ma drewnianą podstawkę.\n\nTaką serię przygotujemy dla każdego zabytku, muzeum czy atrakcji turystycznej.",
       "tags": [
         "turystyka",
         "seria",
@@ -206,7 +206,7 @@
         "obrazy",
         "swieta"
       ],
-      "description": "Obrazek na drewnianej podstawce z wizerunkiem Chrystusa wychodzącego z grobu i miejscem na tekst. Postawisz go na biurku, półce albo w kaplicy.",
+      "description": "Obrazek na drewnianej podstawce z wizerunkiem Chrystusa wychodzącego z grobu.",
       "tags": [
         "Wielkanoc",
         "tekst"
@@ -218,7 +218,7 @@
     },
     {
       "id": "figurka-swietej",
-      "title": "Figurka świętej w czerwonym płaszczu",
+      "title": "Figurka Michała Archanioła",
       "categories": [
         "figurki"
       ],
@@ -238,7 +238,7 @@
       "categories": [
         "pamiatki"
       ],
-      "description": "Miniatura zabytkowego drewnianego kościoła odwzorowana na podstawie zdjęć obiektu, z gontem, wieżą i detalami elewacji.\n\nPrzygotujemy model dowolnego budynku: kościoła, sanktuarium, ratusza czy siedziby firmy.",
+      "description": "Miniatura zabytkowego drewnianego kościoła odwzorowana na podstawie.\n\nPrzygotujemy model dowolnego budynku: kościoła, sanktuarium, ratusza czy siedziby firmy.",
       "tags": [
         "architektura",
         "na zamówienie"
@@ -268,11 +268,11 @@
     },
     {
       "id": "dzieciatko-praskie",
-      "title": "Dzieciątko Jezus Praskie",
+      "title": "Dzieciątko Jezus Koletańskie",
       "categories": [
         "figurki"
       ],
-      "description": "Figurka Dzieciątka Jezus Praskiego z bogato zdobioną szatą i koroną. Duża dokładność nadruku pozwala zachować drobne ornamenty.",
+      "description": "Figurka Dzieciątka Jezus Koletańskiego z bogato zdobioną szatą i koroną. Wycinany po obrysie postaci. Duża dokładność nadruku pozwala zachować drobne ornamenty.",
       "tags": [
         "drewno",
         "nadruk"
@@ -283,12 +283,12 @@
       ]
     },
     {
-      "id": "sw-krzysztof",
-      "title": "Święty Krzysztof – obraz na drewnie",
+      "id": "sw-jozef",
+      "title": "Święty Józef",
       "categories": [
         "obrazy"
       ],
-      "description": "Reprodukcja wizerunku św. Krzysztofa, patrona podróżnych i kierowców, na drewnianej płycie. Dobry upominek dla kierowców i do poświęcenia pojazdów.",
+      "description": "Reprodukcja wizerunku św. Józefa na drewnie.",
       "tags": [
         "reprodukcja",
         "patron"
@@ -300,11 +300,11 @@
     },
     {
       "id": "matka-boza-obraz",
-      "title": "Matka Boża z Dzieciątkiem – obraz w łuku",
+      "title": "Matka Boża Bierzanowska",
       "categories": [
         "obrazy"
       ],
-      "description": "Obraz zakończony łukiem, z podpisem u dołu. Kształt i napis dopasowujemy do wizerunku czczonego w danym sanktuarium.",
+      "description": "Obraz zakończony łukiem, z podpisem u dołu. Kształt i napis dopasowujemy do wizerunku obrazu czczonego w lokalnym kościele.",
       "tags": [
         "sanktuaria",
         "napis"
@@ -321,7 +321,7 @@
         "obrazy",
         "magnesy"
       ],
-      "description": "Ikona Świętej Rodziny w formie magnesu na lodówkę, ze złoceniami podkreślającymi jej wyjątkowy charakter. Drobny, ciepły upominek, który przypomina o rodzinie i świątecznym nastroju. Dobrze sprawdza się jako pamiątka parafialna albo drobny prezent.",
+      "description": "Ikona Świętej Rodziny wykonana na drewnie w formie magnesu.",
       "tags": [
         "ikona",
         "złocenie"
@@ -350,11 +350,11 @@
     },
     {
       "id": "ecce-homo",
-      "title": "Ecce Homo – obraz na drewnie",
+      "title": "Ecce Homo",
       "categories": [
         "obrazy"
       ],
-      "description": "Reprodukcja obrazu „Ecce Homo” na drewnianej płycie. Matowe wykończenie dobrze oddaje fakturę płótna.",
+      "description": "Reprodukcja obrazu „Ecce Homo” na drewnie.",
       "tags": [
         "reprodukcja"
       ],
@@ -365,11 +365,11 @@
     },
     {
       "id": "obraz-swiety-franciszkanin",
-      "title": "Św. Franciszek - magnes",
+      "title": "Św. Franciszek",
       "categories": [
         "magnesy"
       ],
-      "description": "Magnes z wizerunkiem św. Franciszka to niewielka pamiątka o barokowym charakterze, oprawiona w złoconą ramkę. Reprodukcja nawiązuje do klasycznego malarstwa religijnego, dzięki czemu dobrze prezentuje się na lodówce czy tablicy magnetycznej. To drobny upominek, który może trafić do kogoś bliskiego lub stać się pamiątką z pielgrzymki.",
+      "description": "Magnes z wizerunkiem św. Franciszka to niewielka pamiątka o barokowym charakterze, oprawiona w złoconą ramkę. Reprodukcja nawiązuje do klasycznego malarstwa religijnego, dzięki czemu dobrze prezentuje się na lodówce czy tablicy magnetycznej.",
       "tags": [
         "reprodukcja",
         "barok"
@@ -380,11 +380,11 @@
     },
     {
       "id": "ukrzyzowanie-luneta",
-      "title": "Ukrzyżowanie – obraz na drewnie",
+      "title": "Ukrzyżowanie",
       "categories": [
         "obrazy"
       ],
-      "description": "Reprodukcja fresku wycięta w kształcie półkola. Kształt płyty dopasowujemy do oryginalnego dzieła.",
+      "description": "Reprodukcja fresku wycięta w kształcie półkola. Kształt dopasowujemy do oryginalnego dzieła.",
       "tags": [
         "fresk",
         "nietypowy kształt"
@@ -400,7 +400,7 @@
       "categories": [
         "krzyze"
       ],
-      "description": "Krzyż dwustronny z motywem franciszkańskim, osadzony na podstawie, dzięki czemu można ustawić go na biurku lub półce. Formę uzupełniają złocenia, które dodają całości ciepłego, szlachetnego charakteru. To spokojna pamiątka na chrzest, bierzmowanie lub inna okazję, a także drobny upominek dla kogoś bliskiego. Szczegóły wzoru ustalamy indywidualnie.",
+      "description": "Reprodukcja krzyża dwustronnego znajdującego się w Centrum Opatrzności Bożej w warszawie. Krzyż osadzony na podstawie. Formę uzupełniają złocenia, które dodają całości ciepłego, szlachetnego charakteru.",
       "tags": [
         "franciszkański",
         "podstawa"
@@ -413,11 +413,11 @@
     },
     {
       "id": "krucyfiks-konturowy",
-      "title": "Krucyfiks konturowy",
+      "title": "Krucyfiks",
       "categories": [
         "krzyze"
       ],
-      "description": "Krzyż z wizerunkiem Chrystusa wyciętym po konturze postaci. Lekki, a przy tym trwały, do powieszenia na ścianie.",
+      "description": "Reprodukcja krzyża znajdującego sie w kościele w Mogile z wizerunkiem Chrystusa wyciętym po konturze postaci. Lekki, a przy tym trwały, do postawienia lub powieszenia.",
       "tags": [
         "na ścianę"
       ],
@@ -428,11 +428,11 @@
     },
     {
       "id": "tabliczka-z-krzyzem",
-      "title": "Drewniana tabliczka z krzyżem",
+      "title": "Drewnianaplomień z krzyżem",
       "categories": [
         "krzyze"
       ],
-      "description": "Dwuwarstwowa tabliczka w kształcie płomienia z wypukłym krzyżem. Ciepły, ciemny odcień drewna i minimalistyczna forma.",
+      "description": "Dwuczęściowa tabliczka w kształcie płomienia z  krzyżem. Ciepły, ciemny odcień drewna i minimalistyczna forma. Mozliwośc wykonania w dowolnym kolorze.",
       "tags": [
         "relief",
         "minimalizm"
@@ -444,11 +444,11 @@
     },
     {
       "id": "ojciec-pio-medalion",
-      "title": "Św. Ojciec Pio – medalion",
+      "title": "Św. Ojciec Pio",
       "categories": [
         "medaliony"
       ],
-      "description": "Okrągły medalion z portretem św. Ojca Pio, ze srebrzystą obwódką i zawieszką.",
+      "description": "Okrągły medalion z portretem św. Ojca Pio, ze złota obwódką i zawieszką.",
       "tags": [
         "portret",
         "zawieszka"
@@ -462,10 +462,10 @@
       "id": "krakow-pamiatki",
       "title": "Kraków – pamiątki z widokami",
       "categories": [
-        "medaliony",
-        "pamiatki"
+        "pamiatki",
+        "magnesy"
       ],
-      "description": "Kraków – pamiątki z widokami to medaliony i zawieszki przedstawiające motywy związane z miastem, przygotowane z myślą o turystach i miłośnikach Krakowa. Wybrane wzory możemy uzupełnić złoceniem lub srebrzeniem, a część z nich sprawdzi się także jako magnes. To drobny upominek z wyjazdu albo prezent dla kogoś związanego z tym miejscem. Szczegóły wzoru i wykończenia ustalamy indywidualnie.",
+      "description": "Kraków – pamiątki z widokami to drewniane magnesy przedstawiające motywy związane z miastem, przygotowane z myślą o turystach i miłośnikach Krakowa.",
       "tags": [
         "Kraków",
         "turystyka"
@@ -492,11 +492,11 @@
     },
     {
       "id": "tabliczki-z-cytatami",
-      "title": "Tabliczki z cytatami świętych",
+      "title": "Magnesy z cytatami",
       "categories": [
         "magnesy"
       ],
-      "description": "Tabliczki z portretem i cytatem, z ozdobnie wycinaną krawędzią. Na zdjęciach: Matka Teresa z Kalkuty i św. Franciszek.",
+      "description": "Drewniane magnesy z portretami i cytatami, z ozdobnie wycinaną krawędzią. Możliwośc wykonania dedykowanych projektów.",
       "tags": [
         "cytat",
         "upominek"
@@ -528,7 +528,7 @@
       "categories": [
         "swieta"
       ],
-      "description": "Tablica z wyciętą laserowo sceną Bożego Narodzenia i nadrukowanym tekstem. Sprawdzi się jako świąteczna ozdoba i elegancki upominek.",
+      "description": "Tablica z wyciętą laserowo sceną Bożego Narodzenia i wygrawerowanym tekstem.",
       "tags": [
         "ażur",
         "Boże Narodzenie"
@@ -539,11 +539,12 @@
     },
     {
       "id": "szopka-noca",
-      "title": "Szopka nocą – owalna dekoracja",
+      "title": "Szopka nocą",
       "categories": [
-        "swieta"
+        "swieta",
+        "magnesy"
       ],
-      "description": "Owalna dekoracja z nocną sceną Bożego Narodzenia na granatowym tle.",
+      "description": "Owalna magnes ze sceną Bożego Narodzenia na granatowym tle.",
       "tags": [
         "Boże Narodzenie",
         "owal"
@@ -554,11 +555,11 @@
     },
     {
       "id": "azurowa-rozeta",
-      "title": "Ażurowa rozeta",
+      "title": "Koronka bobowska",
       "categories": [
         "dekoracje"
       ],
-      "description": "Okrągła rozeta z delikatnym, koronkowym wzorem wyciętym laserowo w jasnym drewnie. Ozdoba na okno, choinkę lub ścianę.",
+      "description": "Okrągła rozeta z delikatnym, koronkowym wzorem wyciętym laserowo w jasnym drewnie. Ozdoba na okno, choinkę lub ścianę. Możliwość wykonania dowolnych wzorów.",
       "tags": [
         "ażur",
         "jasne drewno"
@@ -573,7 +574,7 @@
       "categories": [
         "gry"
       ],
-      "description": "Drewniane pionki w kształcie ludzików, z kolorowym nadrukiem, osadzone na podstawkach. Przygotujemy je w dowolnym kształcie i kolorze – do gier planszowych, edukacyjnych i wielkoformatowych.",
+      "description": "Drewniane pionki w kształcie ludzików, z kolorowym nadrukiem, osadzone na podstawkach. Przygotujemy je w dowolnym kształcie, kolorze i formacie – do gier planszowych, edukacyjnych i wielkoformatowych.",
       "tags": [
         "gry planszowe",
         "pionki"
@@ -586,10 +587,10 @@
       "id": "figurki-postaci",
       "title": "Figurki postaci do gier",
       "categories": [
-        "gry",
-        "figurki"
+        "figurki",
+        "gry"
       ],
-      "description": "Ilustrowane figurki postaci na podstawkach – od współczesnych bohaterów po postacie w strojach ludowych. Projektujemy je razem z grą albo na podstawie Twoich ilustracji.",
+      "description": "Ilustrowane figurki postaci na podstawkach – od współczesnych bohaterów po postacie w strojach ludowych. Możemy je wykonać na podstawie Twoich ilustracji.",
       "tags": [
         "gry planszowe",
         "ilustracje"
