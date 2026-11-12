@@ -24,7 +24,7 @@
     baseline: '',            // JSON last loaded/published – used to detect changes
     fileSha: null,           // sha of products.json in the repo when loaded
     pending: new Map(),      // name -> { full: Blob, thumb: Blob, url } – new photos not yet published
-    previews: new Map(),     // name -> object URL of photos published in this session (Pages may lag)
+    previews: new Map(),     // name -> object URL of photos published in this session (the hosted site may lag behind the repository)
     removed: new Set(),      // photo names removed from products – deleted from repo on publish if unused
     selected: new Set(),
     settings: {},            // { owner, repo, branch, token } – only in memory/session after login
@@ -73,7 +73,7 @@
     return JSON.parse(new TextDecoder().decode(plain));
   }
 
-  // newest of: auth.json published on the site, copy cached in this browser (Pages may lag after a change)
+  // newest of: auth.json published on the site, copy cached in this browser (the hosted site may lag after a change)
   async function fetchAuth() {
     let remote = null;
     try {
@@ -852,7 +852,7 @@
       const commit = await gh(`${repo}/git/commits`, { method: 'POST', body: { message: `Aktualizacja realizacji z panelu (${summary})`, tree: newTree.sha, parents: [headSha] } });
       await gh(`${repo}/git/refs/heads/${branch()}`, { method: 'PATCH', body: { sha: commit.sha } });
 
-      // keep showing freshly uploaded photos until GitHub Pages rebuilds
+      // keep showing freshly uploaded photos until the hosted site is redeployed
       uploads.forEach(([name, img]) => state.previews.set(name, img.url));
       state.pending.clear();
       state.removed.clear();
