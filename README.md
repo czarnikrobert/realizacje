@@ -1,6 +1,6 @@
 # Realizacje – Polskie Gry Planszowe
 
-Strona z przykładami produktów (portfolio) dla klientów oraz panel administracyjny do zarządzania produktami, zdjęciami i kategoriami. Działa w całości na **GitHub Pages**, bez serwera i bez opłat.
+Strona z przykładami produktów (portfolio) dla klientów oraz panel administracyjny do zarządzania produktami, zdjęciami i kategoriami. Strona jest statyczna (bez bazy danych) i działa na hostingu **Hostinger**. Dane i zdjęcia są w tym repozytorium, a Hostinger wdraża je automatycznie.
 
 ```
 index.html            – strona dla klientów
@@ -15,25 +15,26 @@ admin/                – panel administracyjny
 
 ## 1. Publikacja
 
-- Strona: **<https://pgprealizacje.pl>** (także `www.pgprealizacje.pl`)
-- Repozytorium: <https://github.com/czarnikrobert/realizacje>, gałąź `main`, publikowana przez GitHub Pages (Settings → Pages, źródło: `main`, folder `/`).
-- Stary adres `czarnikrobert.github.io/realizacje` przekierowuje na domenę.
+- Strona: **<https://pgprealizacje.pl>** (także `www.pgprealizacje.pl`, przekierowanie na HTTPS włączone)
+- Hosting: **Hostinger** (pakiet Unlimited Web Hosting), katalog `public_html` strony pgprealizacje.pl.
+- Wdrażanie: **automatyczne z gałęzi `main`** (hPanel → pgprealizacje.pl → Zaawansowane → Git / Wdrożenia). Każdy zapis na `main`, także z panelu administracyjnego, trafia na serwer w ok. minutę. Ręczne wdrożenie: hPanel → Wdrożenia.
+- `.htaccess` blokuje dostęp do plików technicznych (`.git`, ukryte pliki, README) i ustawia pamięć podręczną: zdjęcia 30 dni, CSS/JS 1 dzień, HTML i JSON zawsze świeże.
+- SSL: darmowy certyfikat Hostingera, odnawiany automatycznie. Włączony CDN Hostingera.
 
 > Folder `pojedyncze/` (oryginalne zdjęcia, ~50 MB) jest pominięty w `.gitignore`. Na stronie są ich zoptymalizowane kopie z `images/`.
 
+> Do 12.11.2026 strona działała na GitHub Pages (wyłączone).
+
 ### Domena pgprealizacje.pl
 
-Domena jest zarejestrowana w home.pl. Plik `CNAME` w repozytorium mówi GitHub Pages, pod jaką domeną ma działać strona. Strefa DNS w panelu home.pl:
+Domena jest zarejestrowana w home.pl (tam zostaje strefa DNS). Rekordy w panelu home.pl:
 
 | Typ | Nazwa | Wartość |
 |---|---|---|
-| A | @ | `185.199.108.153` |
-| A | @ | `185.199.109.153` |
-| A | @ | `185.199.110.153` |
-| A | @ | `185.199.111.153` |
-| CNAME | www | `czarnikrobert.github.io.` |
+| A | @ | `45.84.207.210` (serwer Hostingera) |
+| CNAME | www | `pgprealizacje.pl.` |
 
-Kłódkę HTTPS włącza się w **Settings → Pages → Enforce HTTPS**, gdy GitHub wystawi certyfikat.
+Aktualny adres IP pokazuje hPanel → pgprealizacje.pl → „Skieruj domenę” → „Połącz za pomocą rekordów DNS”.
 
 ## 2. Panel administracyjny
 
