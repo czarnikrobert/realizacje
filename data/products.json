@@ -43,6 +43,25 @@
   ],
   "products": [
     {
+      "id": "figurki-postaci",
+      "title": "Figurki postaci do gier",
+      "categories": [
+        "figurki",
+        "gry"
+      ],
+      "description": "Ilustrowane figurki postaci na podstawkach – od współczesnych bohaterów po postacie w strojach ludowych. Możemy je wykonać na podstawie Twoich ilustracji.",
+      "tags": [
+        "gry planszowe",
+        "ilustracje"
+      ],
+      "images": [
+        "img-2870.jpg",
+        "img-2883.jpg",
+        "img-2887.jpg"
+      ],
+      "featured": true
+    },
+    {
       "id": "roraty-2024",
       "title": "Propozycja świąteczna - dedykowane złocone zawieszki",
       "categories": [
@@ -66,25 +85,6 @@
         "roraty-2024-mvuwtklttsz.jpg",
         "roraty-2024-mvuwtll2x79.jpg",
         "roraty-2024-mvux6iajd11.jpg"
-      ],
-      "featured": true
-    },
-    {
-      "id": "figurki-postaci",
-      "title": "Figurki postaci do gier",
-      "categories": [
-        "figurki",
-        "gry"
-      ],
-      "description": "Ilustrowane figurki postaci na podstawkach – od współczesnych bohaterów po postacie w strojach ludowych. Możemy je wykonać na podstawie Twoich ilustracji.",
-      "tags": [
-        "gry planszowe",
-        "ilustracje"
-      ],
-      "images": [
-        "img-2870.jpg",
-        "img-2883.jpg",
-        "img-2887.jpg"
       ],
       "featured": true
     },
