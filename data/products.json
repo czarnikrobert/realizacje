@@ -43,6 +43,29 @@
   ],
   "products": [
     {
+      "id": "herby",
+      "title": "Herby",
+      "categories": [
+        "figurki",
+        "pamiatki"
+      ],
+      "description": "Herb wykonany z drewna sprawdzi się jako upominek z konkretnego miasta lub gminy. Wzór przygotowujemy na podstawie przesłanego projektu. Wycinany laserowo i uzupełniamy pełnokolorowym nadrukiem z możliwością złocenia. Szczegóły herbu ustalamy indywidualnie.",
+      "tags": [],
+      "images": [
+        "herby-mvurynkx9h3.jpg",
+        "herby-mvuryntebzr.jpg",
+        "herby-mvurynxt2k4.jpg",
+        "herby-mvuryo2lp0q.jpg",
+        "herby-mvurygrz5ac.jpg",
+        "herby-mvurygzgtln.jpg",
+        "herby-mvuryh5zp6r.jpg",
+        "herby-mvuryhcixbq.jpg",
+        "herby-mvuryhj5nzf.jpg",
+        "herby-mvuryhq9ve9.jpg"
+      ],
+      "featured": true
+    },
+    {
       "id": "figurki-postaci",
       "title": "Figurki postaci do gier",
       "categories": [
@@ -58,8 +81,7 @@
         "img-2870.jpg",
         "img-2883.jpg",
         "img-2887.jpg"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "roraty-2024",
@@ -159,28 +181,6 @@
       "images": [
         "img-2860.jpg",
         "swiety-jozef-spiacy-mvus1wpvyli.jpg"
-      ]
-    },
-    {
-      "id": "herby",
-      "title": "Herby",
-      "categories": [
-        "figurki",
-        "pamiatki"
-      ],
-      "description": "Herb wykonany z drewna sprawdzi się jako upominek z konkretnego miasta lub gminy. Wzór przygotowujemy na podstawie przesłanego projektu. Wycinany laserowo i uzupełniamy pełnokolorowym nadrukiem z możliwością złocenia. Szczegóły herbu ustalamy indywidualnie.",
-      "tags": [],
-      "images": [
-        "herby-mvurynkx9h3.jpg",
-        "herby-mvuryntebzr.jpg",
-        "herby-mvurynxt2k4.jpg",
-        "herby-mvuryo2lp0q.jpg",
-        "herby-mvurygrz5ac.jpg",
-        "herby-mvurygzgtln.jpg",
-        "herby-mvuryh5zp6r.jpg",
-        "herby-mvuryhcixbq.jpg",
-        "herby-mvuryhj5nzf.jpg",
-        "herby-mvuryhq9ve9.jpg"
       ]
     },
     {
