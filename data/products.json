@@ -43,6 +43,28 @@
   ],
   "products": [
     {
+      "id": "ozdoba-swiateczna-szpic-choinkowy",
+      "title": "Ozdoba świateczna - szpic choinkowy",
+      "categories": [
+        "swieta",
+        "dekoracje"
+      ],
+      "description": "Ozdoba choinkowa pełni funkcję szpica na czubek choinki, zastępując tradycyjną gwiazdę i stając się efektownym zwieńczeniem świątecznego drzewka.",
+      "tags": [
+        "drewno",
+        "ażurek",
+        "święta",
+        "sklejkam złocenie"
+      ],
+      "images": [
+        "ozdoba-swiateczna-szpic-choinkowy-mww11kc8k38.jpg",
+        "ozdoba-swiateczna-szpic-choinkowy-mww11k4mwh1.jpg",
+        "ozdoba-swiateczna-szpic-choinkowy-mww11kkb14q.jpg",
+        "ozdoba-swiateczna-szpic-choinkowy-mww11kuzeca.jpg"
+      ],
+      "featured": true
+    },
+    {
       "id": "roraty-2024",
       "title": "Propozycja świąteczna - dedykowane złocone zawieszki",
       "categories": [
@@ -119,8 +141,7 @@
       "images": [
         "img-2860.jpg",
         "swiety-jozef-spiacy-mvus1wpvyli.jpg"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "herby",
@@ -160,8 +181,7 @@
       "images": [
         "img-2907.jpg",
         "szopka-krakowska-mvsla25vmpj.jpg"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "zamek-bobolice",
@@ -179,8 +199,7 @@
         "img-2897.jpg",
         "img-2900.jpg",
         "img-2902.jpg"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "drewniany-kosciol",
@@ -212,8 +231,7 @@
       "images": [
         "img-2921.jpg",
         "jan-pawel-ii-medalion-mvus1bfa1t8.jpg"
-      ],
-      "featured": true
+      ]
     },
     {
       "id": "chrystus-zmartwychwstaly",
